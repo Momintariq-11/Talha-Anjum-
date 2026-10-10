@@ -65,7 +65,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </div>
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
               <span className="text-emerald-400 font-semibold">
-                {brandMode === 'solvix' ? 'Solviqx Agency' : 'Vertex Studio Agency'}
+                {brandMode === 'solvix' ? 'Solviqx Agency' : 'Vertex Studios Agency'}
               </span>
               <span className="text-zinc-600">•</span>
               <span>{brandMode === 'solvix' ? 'Digital Innovation' : 'CEO & Founder'}</span>
@@ -123,7 +123,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                           Official Channels
                         </span>
-                        <span className="text-[10px] text-zinc-400 font-normal">Vertex Studio</span>
+                        <span className="text-[10px] text-zinc-400 font-normal">Vertex Studios</span>
                       </div>
                       {card.socialLinks.map((link) => (
                         <a
@@ -132,7 +132,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-full py-2 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-400 hover:text-emerald-300 text-xs font-mono font-medium flex items-center justify-between transition-all group/btn shadow-sm"
-                          title={`Visit Vertex Studio ${link.name}`}
+                          title={`Visit Vertex Studios ${link.name}`}
                         >
                           <div className="flex items-center gap-2.5">
                             {link.icon === 'instagram' && (

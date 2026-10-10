@@ -23,11 +23,11 @@ export const Footer: React.FC<FooterProps> = ({ brandMode = 'personal' }) => {
                   <span>Solviq</span>
                   <span className="text-emerald-400">x</span>
                 </div>
-                <div className="text-xs font-gotham text-zinc-400 font-medium mt-0.5">
+                <div className="text-xs font-gotham text-emerald-400 font-semibold mt-0.5">
                   Your Vision, Our Digital Expertise
                 </div>
-                <div className="text-xs font-mono text-emerald-400 font-semibold mt-1">
-                  Founded by Muhammad Talha Anjum • Lead Architect
+                <div className="text-xs font-mono text-zinc-400 mt-1">
+                  Full-Service Digital Innovation & Engineering Agency
                 </div>
               </div>
             ) : (
@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({ brandMode = 'personal' }) => {
                     Muhammad Talha Anjum
                   </div>
                   <div className="text-xs font-mono text-emerald-400 font-semibold mt-0.5">
-                    CEO & Founder of Studio Vertex Agency
+                    CEO & Founder of Vertex Studios Agency
                   </div>
                   <div className="text-xs font-mono text-zinc-400 mt-0.5">
                     AI & Full Stack Developer | Social Media Marketing
@@ -90,9 +90,17 @@ export const Footer: React.FC<FooterProps> = ({ brandMode = 'personal' }) => {
           </div>
         </div>
 
-        <div className="pt-6 flex items-center justify-center text-xs font-mono text-zinc-500">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-500">
           <div>
             © 2026 {PERSONAL_INFO.name}. All rights reserved.
+          </div>
+          <div className="flex items-center gap-1.5 font-gotham text-zinc-400 text-xs">
+            <span>Portfolio engineered by</span>
+            <span className="font-bold text-white">
+              Solviq<span className="text-emerald-400">x</span>
+            </span>
+            <span className="text-zinc-600">•</span>
+            <span className="text-zinc-500 text-[11px]">Your Vision, Our Digital Expertise</span>
           </div>
         </div>
       </div>

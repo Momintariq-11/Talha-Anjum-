@@ -6,8 +6,6 @@ export const SOLVIX_INFO = {
   headline: "Your Vision, Our Digital Expertise.",
   subheadline: "Solviqx is a full-service digital innovation agency specializing in high-performance full-stack web platforms, intelligent AI automation systems, and scalable digital marketing campaigns.",
   aboutPitch: "We engineer scalable digital products and growth engines that help modern brands dominate their markets with speed, precision, and architectural excellence.",
-  founder: "Muhammad Talha Anjum",
-  founderRole: "Founder & Lead Technical Architect",
   availability: "Accepting select client partnerships & enterprise builds",
   contact: {
     email: "talhaanjum6735@gmail.com",

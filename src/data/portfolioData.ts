@@ -101,9 +101,9 @@ export const EXPERTISE_CARDS: ExpertiseCard[] = [
   },
   {
     icon: "TrendingUp",
-    title: "Vertex Studio Agency",
+    title: "Vertex Studios Agency",
     role: "CEO & Founder",
-    description: "CEO and Founder of Vertex Studio Agency. Delivering performance-driven Meta Ads, organic content strategy, page management, and scaling social channels for brands.",
+    description: "CEO and Founder of Vertex Studios Agency. Delivering performance-driven Meta Ads, organic content strategy, page management, and scaling social channels for brands.",
     highlight: "Meta Ads • Content • Page Mgmt",
     gradient: "from-fuchsia-500/20 via-pink-500/10 to-transparent",
     borderGlow: "rgba(232, 121, 249, 0.4)",
