@@ -89,46 +89,60 @@ export const SkillsSection: React.FC = () => {
 
         {/* Skills Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredSkills.map((skill) => (
-            <div
-              key={skill.title}
-              className="rounded-xl p-5 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group"
-            >
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-500/40 transition-colors">
-                    {getSkillIcon(skill.icon)}
+          {filteredSkills.map((skill, index) => {
+            const isFullWidth = filteredSkills.length === 7 && index === 6
+
+            return (
+              <div
+                key={skill.title}
+                className={`rounded-xl p-5 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group ${
+                  isFullWidth ? 'md:col-span-2 lg:col-span-3' : ''
+                }`}
+              >
+                <div>
+                  <div className={`flex items-center gap-3 mb-3 ${isFullWidth ? 'sm:justify-between' : ''}`}>
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-500/40 transition-colors">
+                        {getSkillIcon(skill.icon)}
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
+                          {skill.title}
+                        </h3>
+                        <span className="text-[11px] font-mono text-zinc-400 block">
+                          {skill.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {isFullWidth && (
+                      <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-semibold">
+                        Growth Toolkit
+                      </span>
+                    )}
                   </div>
-                  <div>
-                    <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
-                      {skill.title}
-                    </h3>
-                    <span className="text-[11px] font-mono text-zinc-400 block">
-                      {skill.category}
+
+                  <div className="bg-black/40 rounded-lg p-2.5 border border-white/[0.06] mb-3">
+                    <span className="text-xs text-zinc-300 font-mono flex items-center gap-2">
+                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>{skill.skills}</span>
                     </span>
                   </div>
                 </div>
 
-                <div className="bg-black/40 rounded-lg p-2.5 border border-white/[0.06] mb-3">
-                  <span className="text-xs text-zinc-300 font-mono flex items-center gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>{skill.skills}</span>
-                  </span>
+                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
+                  {skill.techs.map((t) => (
+                    <span
+                      key={t}
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-300 border border-white/10"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
               </div>
-
-              <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/[0.06]">
-                {skill.techs.map((t) => (
-                  <span
-                    key={t}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-300 border border-white/10"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

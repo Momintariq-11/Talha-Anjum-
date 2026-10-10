@@ -101,16 +101,16 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ className = '' }) => {
             href={PERSONAL_INFO.contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="py-2.5 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+            className="py-2.5 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-xs flex items-center justify-center gap-2 transition-all outline-none focus:outline-none focus:ring-0"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
+            <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
             <span>WhatsApp</span>
           </a>
           <a
             href={`mailto:${PERSONAL_INFO.contact.email}`}
-            className="py-2.5 px-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-xs flex items-center justify-center gap-2 transition-colors"
+            className="py-2.5 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-semibold text-xs flex items-center justify-center gap-2 transition-all outline-none focus:outline-none focus:ring-0"
           >
-            <Mail className="w-3.5 h-3.5" />
+            <Mail className="w-3.5 h-3.5 text-emerald-400" />
             <span>Email</span>
           </a>
         </div>

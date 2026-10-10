@@ -43,6 +43,18 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #10b981;
   }
+
+  /* Eliminate browser default blue/cyan focus rings - strictly emerald */
+  :focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 1px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  a, button {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 /* Modern High-Tech Developer Typography strictly for FULL STACK DEVELOPMENT */

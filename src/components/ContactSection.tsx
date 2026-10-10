@@ -267,9 +267,9 @@ export const ContactSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleSendWhatsApp}
-                    className="py-2.5 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs tracking-wide transition-colors flex items-center justify-center gap-2 border border-white/15"
+                    className="py-2.5 px-4 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-semibold text-xs tracking-wide transition-all flex items-center justify-center gap-2 border border-emerald-500/30 outline-none focus:outline-none focus:ring-0"
                   >
-                    <MessageSquare className="w-3.5 h-3.5" />
+                    <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
                     <span>WhatsApp Direct</span>
                   </button>
                 </div>
