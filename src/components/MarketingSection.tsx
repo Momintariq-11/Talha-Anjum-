@@ -12,7 +12,7 @@ export const MarketingSection: React.FC = () => {
       case 'Smartphone':
         return <Smartphone className="w-5 h-5 text-emerald-400" />
       case 'BarChart3':
-        return <BarChart3 className="w-5 h-5 text-white" />
+        return <BarChart3 className="w-5 h-5 text-emerald-400" />
       default:
         return <BarChart3 className="w-5 h-5 text-emerald-400" />
     }
@@ -95,30 +95,30 @@ export const MarketingSection: React.FC = () => {
             <div className="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-white/10">
               <button
                 onClick={() => setActiveTab('pipeline')}
-                className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                className={`px-3 py-1 rounded text-xs font-mono transition-all ${
                   activeTab === 'pipeline'
-                    ? 'bg-emerald-600 text-black font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-emerald-500 text-black font-bold border border-emerald-400 shadow-sm'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
                 Funnel Steps
               </button>
               <button
                 onClick={() => setActiveTab('ads')}
-                className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                className={`px-3 py-1 rounded text-xs font-mono transition-all ${
                   activeTab === 'ads'
-                    ? 'bg-emerald-600 text-black font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-emerald-500 text-black font-bold border border-emerald-400 shadow-sm'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
                 Ads Strategy
               </button>
               <button
                 onClick={() => setActiveTab('cadence')}
-                className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                className={`px-3 py-1 rounded text-xs font-mono transition-all ${
                   activeTab === 'cadence'
-                    ? 'bg-emerald-600 text-black font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-emerald-500 text-black font-bold border border-emerald-400 shadow-sm'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
                 Posting Cadence
@@ -140,7 +140,7 @@ export const MarketingSection: React.FC = () => {
                   <p className="text-xs text-zinc-400">Reels, carousel assets, and high-clarity copy variation.</p>
                 </div>
                 <div className="p-4 rounded-lg bg-black/40 border border-white/[0.06]">
-                  <span className="text-[10px] font-mono text-white block mb-1">03 / ADS LAUNCH</span>
+                  <span className="text-[10px] font-mono text-emerald-400 block mb-1">03 / ADS LAUNCH</span>
                   <h4 className="text-white font-bold text-sm mb-1">Meta Ads Manager</h4>
                   <p className="text-xs text-zinc-400">Traffic, lead capture, and dynamic budget allocation.</p>
                 </div>

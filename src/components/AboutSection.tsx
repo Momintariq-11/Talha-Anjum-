@@ -13,7 +13,7 @@ export const AboutSection: React.FC = () => {
       case 'Zap':
         return <Zap className="w-5 h-5 text-emerald-400" />
       case 'Wrench':
-        return <Wrench className="w-5 h-5 text-white" />
+        return <Wrench className="w-5 h-5 text-emerald-400" />
       case 'TrendingUp':
         return <TrendingUp className="w-5 h-5 text-emerald-400" />
       default:
@@ -71,7 +71,11 @@ export const AboutSection: React.FC = () => {
             {EXPERTISE_CARDS.map((card) => (
               <div
                 key={card.title}
-                className="rounded-xl p-6 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group"
+                className={`rounded-xl p-6 bg-[#0d1117] transition-all flex flex-col justify-between group ${
+                  card.socialLinks
+                    ? 'border border-emerald-500/30 hover:border-emerald-500/50 shadow-lg shadow-emerald-500/5'
+                    : 'border border-white/10 hover:border-emerald-500/30'
+                }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -108,18 +112,30 @@ export const AboutSection: React.FC = () => {
                   )}
 
                   {card.socialLinks && (
-                    <div className="mt-3.5 pt-3 border-t border-white/[0.08] grid grid-cols-3 gap-1.5">
+                    <div className="mt-4 pt-3.5 border-t border-emerald-500/20 flex flex-col gap-2">
+                      <div className="flex items-center justify-between text-[11px] font-mono text-emerald-400 font-semibold mb-0.5">
+                        <span className="flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          Official Channels
+                        </span>
+                        <span className="text-[10px] text-zinc-400 font-normal">Vertex Studio</span>
+                      </div>
                       {card.socialLinks.map((link) => {
                         if (link.isPending) {
                           return (
-                            <span
+                            <div
                               key={link.name}
-                              className="py-1.5 px-2 rounded-lg bg-white/[0.03] border border-white/5 text-zinc-600 text-[11px] font-mono font-medium flex items-center justify-center gap-1.5 cursor-not-allowed select-none"
+                              className="w-full py-2 px-3 rounded-lg bg-white/[0.03] border border-white/10 text-zinc-400 text-xs font-mono flex items-center justify-between cursor-not-allowed select-none"
                               title="Facebook page link coming soon"
                             >
-                              <FacebookIcon className="w-3.5 h-3.5 opacity-40" />
-                              <span className="hidden sm:inline">Facebook</span>
-                            </span>
+                              <div className="flex items-center gap-2.5">
+                                <FacebookIcon className="w-4 h-4 text-zinc-500" />
+                                <span>Facebook</span>
+                              </div>
+                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 font-normal">
+                                Coming Soon
+                              </span>
+                            </div>
                           )
                         }
 
@@ -129,13 +145,19 @@ export const AboutSection: React.FC = () => {
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="py-1.5 px-2 rounded-lg bg-white/5 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/30 text-zinc-300 hover:text-emerald-400 text-[11px] font-mono font-medium flex items-center justify-center gap-1.5 transition-colors"
-                            title={`Open Vertex Studios ${link.name}`}
+                            className="w-full py-2 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-400 hover:text-emerald-300 text-xs font-mono font-medium flex items-center justify-between transition-all group/btn shadow-sm"
+                            title={`Visit Vertex Studio ${link.name}`}
                           >
-                            {link.icon === 'instagram' && <InstagramIcon className="w-3.5 h-3.5" />}
-                            {link.icon === 'tiktok' && <TikTokIcon className="w-3.5 h-3.5" />}
-                            {link.icon === 'facebook' && <FacebookIcon className="w-3.5 h-3.5" />}
-                            <span className="hidden sm:inline">{link.name}</span>
+                            <div className="flex items-center gap-2.5">
+                              {link.icon === 'instagram' && <InstagramIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />}
+                              {link.icon === 'tiktok' && <TikTokIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />}
+                              {link.icon === 'facebook' && <FacebookIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />}
+                              <span>{link.name}</span>
+                            </div>
+                            <span className="text-[11px] text-emerald-400/80 group-hover/btn:text-emerald-300 flex items-center gap-1">
+                              <span>Open</span>
+                              <span className="transition-transform group-hover/btn:translate-x-0.5">↗</span>
+                            </span>
                           </a>
                         )
                       })}

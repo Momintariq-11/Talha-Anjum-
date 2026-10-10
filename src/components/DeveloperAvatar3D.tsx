@@ -137,20 +137,16 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
           {/* Main Play / Pause Button */}
           <button
             onClick={handleTogglePlay}
-            className={`flex-1 py-2.5 px-4 rounded-xl font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2 ${
-              isSpeaking
-                ? 'bg-emerald-500 hover:bg-emerald-400 text-black'
-                : 'bg-white/10 hover:bg-white/20 text-white border border-white/10'
-            }`}
+            className="flex-1 py-2.5 px-4 rounded-xl font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/20 active:scale-[0.98]"
           >
             {isSpeaking ? (
               <>
-                <Pause className="w-4 h-4" />
-                <span>Pause</span>
+                <Pause className="w-4 h-4 fill-black text-black" />
+                <span>Pause Voice</span>
               </>
             ) : (
               <>
-                <Play className="w-4 h-4 fill-white" />
+                <Play className="w-4 h-4 fill-black text-black" />
                 <span>{isPaused ? 'Resume Voice' : 'Play Introduction'}</span>
               </>
             )}
@@ -162,7 +158,7 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
             className={`p-2.5 rounded-xl border font-mono text-xs transition-colors ${
               isMuted
                 ? 'bg-red-500/10 border-red-500/30 text-red-400'
-                : 'bg-white/5 hover:bg-white/10 border-white/10 text-zinc-300 hover:text-white'
+                : 'bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30 text-emerald-400'
             }`}
             title={isMuted ? 'Unmute voice' : 'Mute voice'}
           >

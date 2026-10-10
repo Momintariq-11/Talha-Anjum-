@@ -12,13 +12,13 @@ export const SkillsSection: React.FC = () => {
       case 'Code2':
         return <Code2 className="w-5 h-5 text-emerald-400" />
       case 'Cpu':
-        return <Cpu className="w-5 h-5 text-white" />
+        return <Cpu className="w-5 h-5 text-emerald-400" />
       case 'Database':
         return <Database className="w-5 h-5 text-emerald-400" />
       case 'Brain':
-        return <Brain className="w-5 h-5 text-white" />
+        return <Brain className="w-5 h-5 text-emerald-400" />
       case 'GitBranch':
-        return <GitBranch className="w-5 h-5 text-zinc-300" />
+        return <GitBranch className="w-5 h-5 text-emerald-400" />
       case 'Megaphone':
         return <Megaphone className="w-5 h-5 text-emerald-400" />
       default:
@@ -76,9 +76,9 @@ export const SkillsSection: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all border ${
                 activeCategory === cat.id
-                  ? 'bg-emerald-600 text-black border-emerald-500 font-bold'
+                  ? 'bg-emerald-500 text-black border-emerald-400 font-bold shadow-sm'
                   : 'bg-[#0d1117] text-zinc-400 border-white/10 hover:text-white hover:border-white/20'
               }`}
             >

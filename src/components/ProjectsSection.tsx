@@ -47,9 +47,9 @@ export const ProjectsSection: React.FC = () => {
             <button
               key={tab.id}
               onClick={() => setSelectedFilter(tab.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all border ${
                 selectedFilter === tab.id
-                  ? 'bg-emerald-600 text-black border-emerald-500 font-bold'
+                  ? 'bg-emerald-500 text-black border-emerald-400 font-bold shadow-sm'
                   : 'bg-[#0d1117] text-zinc-400 border-white/10 hover:text-white hover:border-white/20'
               }`}
             >
