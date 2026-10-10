@@ -1,5 +1,5 @@
 // Web Speech Synthesis Controller for Muhammad Talha Anjum's Voice Intro
-// Uses browser's built-in speech engine: 0 external dependencies, 0 latency
+// Configured with a deeper, heavier baritone masculine voice profile
 
 export const INTRO_SCRIPT =
   "Hi, I'm Muhammad Talha Anjum, an Artificial Intelligence student and AI & Full-Stack Developer from Pakistan. I specialize in building practical intelligent applications with Python and the Gemini API, full-stack web platforms using React, Next.js, and PostgreSQL, and driving digital growth through targeted Meta Ads. Explore my work below, or let's connect to build something intelligent."
@@ -13,7 +13,6 @@ export class VoiceIntroManager {
 
   constructor() {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      // Warm up voices
       window.speechSynthesis.getVoices()
       window.speechSynthesis.onvoiceschanged = () => {
         window.speechSynthesis.getVoices()
@@ -30,19 +29,19 @@ export class VoiceIntroManager {
     const voices = window.speechSynthesis.getVoices()
     if (!voices.length) return null
 
-    // Look for high-quality English natural voices (e.g., Google US English, Samantha, Daniel, Aaron, or English UK/US)
-    const preferred = voices.find(
-      (v) =>
-        (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Daniel') || v.name.includes('Aaron') || v.name.includes('en-US')) &&
-        v.lang.startsWith('en')
-    )
-    return preferred || voices.find((v) => v.lang.startsWith('en')) || voices[0]
+    // Search for deeper male voices across platforms
+    const maleNames = ['Daniel', 'Arthur', 'Aaron', 'Fred', 'George', 'Google UK English Male', 'en-GB', 'en-US']
+    for (const name of maleNames) {
+      const match = voices.find((v) => v.name.includes(name) && v.lang.startsWith('en'))
+      if (match) return match
+    }
+
+    return voices.find((v) => v.lang.startsWith('en')) || voices[0]
   }
 
   public play() {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
 
-    // If currently paused, resume
     if (this.isPaused) {
       window.speechSynthesis.resume()
       this.isPaused = false
@@ -51,7 +50,6 @@ export class VoiceIntroManager {
       return
     }
 
-    // Cancel any previous utterance
     window.speechSynthesis.cancel()
 
     this.utterance = new SpeechSynthesisUtterance(INTRO_SCRIPT)
@@ -60,8 +58,9 @@ export class VoiceIntroManager {
       this.utterance.voice = voice
     }
 
-    this.utterance.rate = 1.02
-    this.utterance.pitch = 1.0
+    // Heavy, deep pitch configuration
+    this.utterance.pitch = 0.74 // Lowered pitch for a heavier, deeper resonance
+    this.utterance.rate = 0.95  // Confident, paced speaking cadence
     this.utterance.volume = this.isMuted ? 0 : 1.0
 
     this.utterance.onstart = () => {
@@ -116,7 +115,6 @@ export class VoiceIntroManager {
     if (this.utterance) {
       this.utterance.volume = this.isMuted ? 0 : 1.0
     }
-    // If currently playing while muting, re-apply
     if (this.isSpeaking) {
       this.stop()
       this.play()

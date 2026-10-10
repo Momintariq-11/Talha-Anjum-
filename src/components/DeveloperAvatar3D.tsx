@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
-import { Play, Pause, Volume2, VolumeX, MessageSquare } from 'lucide-react'
+import { Play, Pause, Volume2, VolumeX, MessageSquare, ShieldCheck } from 'lucide-react'
 import { voiceIntroManager, INTRO_SCRIPT } from './VoiceIntroController'
 
 interface DeveloperAvatar3DProps {
@@ -15,7 +15,6 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
   const [transcript, setTranscript] = useState<string>('')
   const [transform3D, setTransform3D] = useState<string>('')
 
-  // Subscribe to speech state
   useEffect(() => {
     voiceIntroManager.setListener((state) => {
       setIsSpeaking(state.isSpeaking)
@@ -44,7 +43,7 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
       0.1,
       1000
     )
-    camera.position.z = 8
+    camera.position.z = 7.5
 
     let renderer: THREE.WebGLRenderer
     try {
@@ -62,23 +61,22 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
     renderer.setClearColor(0x000000, 0)
     container.appendChild(renderer.domElement)
 
-    // Central Audio Reactive Rings
     const ringGroup = new THREE.Group()
     scene.add(ringGroup)
 
     // Ring 1 (Emerald Outer Orbit)
-    const ring1Geo = new THREE.TorusGeometry(3.2, 0.03, 16, 80)
+    const ring1Geo = new THREE.TorusGeometry(2.8, 0.03, 16, 80)
     const ring1Mat = new THREE.MeshBasicMaterial({
       color: 0x10b981,
       transparent: true,
-      opacity: 0.5
+      opacity: 0.55
     })
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat)
-    ring1.rotation.x = Math.PI / 3
+    ring1.rotation.x = Math.PI / 3.2
     ringGroup.add(ring1)
 
     // Ring 2 (White Thin Precision Axis)
-    const ring2Geo = new THREE.TorusGeometry(3.6, 0.02, 16, 80)
+    const ring2Geo = new THREE.TorusGeometry(3.1, 0.02, 16, 80)
     const ring2Mat = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       transparent: true,
@@ -89,27 +87,27 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
     ringGroup.add(ring2)
 
     // Floating Data Particle Matrix (Emerald & White)
-    const particleCount = 700
+    const particleCount = 500
     const pGeo = new THREE.BufferGeometry()
     const pPos = new Float32Array(particleCount * 3)
     const pColors = new Float32Array(particleCount * 3)
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      pPos[i] = (Math.random() - 0.5) * 16
-      pPos[i + 1] = (Math.random() - 0.5) * 16
-      pPos[i + 2] = (Math.random() - 0.5) * 10
+      pPos[i] = (Math.random() - 0.5) * 14
+      pPos[i + 1] = (Math.random() - 0.5) * 14
+      pPos[i + 2] = (Math.random() - 0.5) * 8
 
       const isEmerald = Math.random() > 0.4
-      pColors[i] = isEmerald ? 0.06 : 0.9 // R
-      pColors[i + 1] = isEmerald ? 0.72 : 0.9 // G
-      pColors[i + 2] = isEmerald ? 0.5 : 0.95 // B
+      pColors[i] = isEmerald ? 0.06 : 0.9
+      pColors[i + 1] = isEmerald ? 0.72 : 0.9
+      pColors[i + 2] = isEmerald ? 0.5 : 0.95
     }
 
     pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
     pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3))
 
     const pMat = new THREE.PointsMaterial({
-      size: 0.06,
+      size: 0.05,
       vertexColors: true,
       transparent: true,
       opacity: 0.7
@@ -117,7 +115,6 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
     const particles = new THREE.Points(pGeo, pMat)
     scene.add(particles)
 
-    // Mouse movement
     let mouseX = 0
     let mouseY = 0
     let targetX = 0
@@ -131,7 +128,6 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
 
     window.addEventListener('mousemove', handleMouseMove)
 
-    // Animation loop
     let animId: number
     const clock = new THREE.Clock()
 
@@ -143,19 +139,17 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
       targetX += (mouseX - targetX) * 0.05
       targetY += (mouseY - targetY) * 0.05
 
-      // Orbit rotations
-      ring1.rotation.z += delta * (isSpeaking ? 1.2 : 0.3)
-      ring2.rotation.z -= delta * (isSpeaking ? 0.9 : 0.2)
+      ring1.rotation.z += delta * (isSpeaking ? 1.4 : 0.35)
+      ring2.rotation.z -= delta * (isSpeaking ? 1.1 : 0.25)
 
-      // Audio reactive pulse
-      const pulse = isSpeaking ? Math.sin(elapsed * 6) * 0.15 : 0
+      const pulse = isSpeaking ? Math.sin(elapsed * 7) * 0.12 : 0
       ringGroup.scale.set(1 + pulse, 1 + pulse, 1 + pulse)
 
-      ringGroup.position.x = targetX * 0.8
-      ringGroup.position.y = targetY * 0.6
+      ringGroup.position.x = targetX * 0.6
+      ringGroup.position.y = targetY * 0.5
 
-      particles.rotation.y = elapsed * 0.04
-      particles.rotation.x = targetY * 0.1
+      particles.rotation.y = elapsed * 0.035
+      particles.rotation.x = targetY * 0.08
 
       renderer.render(scene, camera)
     }
@@ -187,20 +181,20 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
     }
   }, [isSpeaking])
 
-  // Mouse Parallax for the Avatar Card
+  // Mouse Parallax for the Avatar Face
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget
     const rect = card.getBoundingClientRect()
     const x = e.clientX - rect.left - rect.width / 2
     const y = e.clientY - rect.top - rect.height / 2
 
-    const rotX = -(y / rect.height) * 12
-    const rotY = (x / rect.width) * 12
-    setTransform3D(`perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`)
+    const rotX = -(y / rect.height) * 14
+    const rotY = (x / rect.width) * 14
+    setTransform3D(`perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`)
   }
 
   const handleCardMouseLeave = () => {
-    setTransform3D('perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)')
+    setTransform3D('perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)')
   }
 
   const handleTogglePlay = () => {
@@ -232,76 +226,74 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
           transform: transform3D,
           transition: 'transform 0.12s ease-out'
         }}
-        className="relative z-10 w-full max-w-sm rounded-2xl bg-[#0d1117] border border-white/10 p-5 shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-sm rounded-3xl bg-[#0d1117] border border-white/10 p-6 shadow-2xl overflow-hidden flex flex-col items-center"
       >
-        {/* Subtle top indicator bar */}
-        <div className="flex items-center justify-between pb-3.5 border-b border-white/[0.08] mb-4">
+        {/* Top Header Label */}
+        <div className="w-full flex items-center justify-between pb-3.5 border-b border-white/[0.08] mb-5">
           <div className="flex items-center gap-2">
             <span
-              className={`w-2.5 h-2.5 rounded-full ${
+              className={`w-2 h-2 rounded-full ${
                 isSpeaking
                   ? 'bg-emerald-400 animate-ping shadow-[0_0_12px_#10b981]'
                   : 'bg-emerald-500'
               }`}
             />
-            <span className="font-mono text-xs font-semibold text-white tracking-wider uppercase flex items-center gap-1.5">
-              <span>Talha Anjum</span>
-              <span className="text-zinc-500">•</span>
-              <span className="text-emerald-400">Digital Avatar</span>
+            <span className="font-mono text-xs font-semibold text-white tracking-wider uppercase">
+              Digital Avatar // Voice Core
             </span>
           </div>
 
-          <span className="text-[10px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-white/5 border border-white/10">
-            {isSpeaking ? 'Speaking...' : isPaused ? 'Paused' : 'Ready'}
+          <span className="text-[10px] font-mono text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+            {isSpeaking ? 'Speaking (Deep Voice)' : isPaused ? 'Paused' : 'Ready'}
           </span>
         </div>
 
-        {/* Real Photo Portrait Frame */}
-        <div className="relative rounded-xl overflow-hidden border-2 border-emerald-500/40 bg-[#08090d] aspect-[4/5] max-h-72 w-full flex items-center justify-center shadow-lg group">
-          <img
-            src="/talha-portrait.jpg"
-            alt="Muhammad Talha Anjum"
-            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            onError={(e) => {
-              // Fallback to full photo if portrait not loaded
-              e.currentTarget.src = '/talha.jpg'
-            }}
+        {/* ================= FOCUSED FACE-ONLY AVATAR CIRCLE ================= */}
+        <div className="relative my-2">
+          {/* Outer Pulsing Glow Ring */}
+          <div
+            className={`absolute -inset-2.5 rounded-full transition-all duration-300 ${
+              isSpeaking
+                ? 'bg-emerald-500/20 blur-md animate-pulse'
+                : 'bg-transparent'
+            }`}
           />
 
-          {/* Holographic Scanline Overlay while speaking */}
-          {isSpeaking && (
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/10 to-transparent animate-pulse pointer-events-none" />
-          )}
+          {/* Precision Circular Face Aperture */}
+          <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2 border-emerald-400/80 shadow-2xl bg-[#08090d] flex items-center justify-center">
+            <img
+              src="/talha-face.jpg"
+              alt="Muhammad Talha Anjum Face Avatar"
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              onError={(e) => {
+                e.currentTarget.src = '/talha.jpg'
+              }}
+            />
 
-          {/* Bottom Audio Visualizer Bar Overlay */}
-          <div className="absolute bottom-3 left-3 right-3 p-2 rounded-lg bg-black/75 backdrop-blur-md border border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span className="text-[10px] font-mono text-zinc-300">
-                {isSpeaking ? 'AI Voice Active' : 'Voice Intro Ready'}
-              </span>
-            </div>
+            {/* Speaking Scanline Glow */}
+            {isSpeaking && (
+              <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/15 via-transparent to-transparent pointer-events-none" />
+            )}
+          </div>
 
-            {/* 5-Bar Equalizer Wave */}
-            <div className="flex items-end gap-1 h-3.5">
-              {[60, 100, 40, 85, 50].map((h, i) => (
-                <div
-                  key={i}
-                  className={`w-1 rounded-full bg-emerald-400 ${
-                    isSpeaking ? 'animate-pulse' : 'h-1'
-                  }`}
-                  style={{
-                    height: isSpeaking ? `${h}%` : '3px',
-                    animationDuration: `${0.4 + i * 0.15}s`
-                  }}
-                />
-              ))}
-            </div>
+          {/* Verified Badge */}
+          <div className="absolute bottom-1 right-2 w-7 h-7 rounded-full bg-[#0d1117] border border-emerald-500 flex items-center justify-center text-emerald-400 shadow-md">
+            <ShieldCheck className="w-4 h-4" />
           </div>
         </div>
 
+        {/* Identity Title */}
+        <div className="text-center mt-3 mb-4">
+          <h3 className="text-lg font-bold text-white tracking-tight">
+            Muhammad Talha Anjum
+          </h3>
+          <p className="text-xs font-mono text-emerald-400 mt-0.5">
+            Heavy-Voice Interactive AI Avatar
+          </p>
+        </div>
+
         {/* ================= AUDIO CONTROLS STRICTLY NEXT TO AVATAR ================= */}
-        <div className="mt-4 pt-3.5 border-t border-white/[0.08] flex items-center justify-between gap-3">
+        <div className="w-full pt-4 border-t border-white/[0.08] flex items-center justify-between gap-3">
           {/* Main Play / Pause Button */}
           <button
             onClick={handleTogglePlay}
@@ -314,12 +306,12 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
             {isSpeaking ? (
               <>
                 <Pause className="w-4 h-4" />
-                <span>Pause Intro</span>
+                <span>Pause Voice</span>
               </>
             ) : (
               <>
                 <Play className="w-4 h-4 fill-white" />
-                <span>{isPaused ? 'Resume Intro' : 'Listen to Intro'}</span>
+                <span>{isPaused ? 'Resume Voice' : 'Listen to Voice'}</span>
               </>
             )}
           </button>
@@ -340,10 +332,10 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
 
         {/* Live Subtitle Transcript Bubble */}
         {(isSpeaking || isPaused) && (
-          <div className="mt-3 p-3 rounded-xl bg-black/60 border border-emerald-500/30 text-[11px] font-mono text-zinc-300 leading-relaxed animate-in fade-in duration-200">
+          <div className="w-full mt-3 p-3 rounded-xl bg-black/60 border border-emerald-500/30 text-[11px] font-mono text-zinc-300 leading-relaxed animate-in fade-in duration-200">
             <div className="flex items-center gap-1.5 text-emerald-400 font-bold mb-1 text-[10px]">
               <MessageSquare className="w-3 h-3" />
-              <span>TALHA SAYS:</span>
+              <span>SPOKEN TRANSCRIPT:</span>
             </div>
             <p className="line-clamp-3">
               "{transcript || INTRO_SCRIPT}"
@@ -352,9 +344,8 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
         )}
       </div>
 
-      {/* Subtle Caption Note */}
       <p className="text-[11px] font-mono text-zinc-500 mt-3 text-center">
-        Click <span className="text-emerald-400 font-semibold">"Listen to Intro"</span> to hear Talha speak about his AI & Full-Stack work
+        Press <span className="text-emerald-400 font-semibold">"Listen to Voice"</span> to hear Talha speak in a heavy, natural baritone voice
       </p>
     </div>
   )
