@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Send, ArrowDown, Sparkles } from 'lucide-react'
 import { GithubIcon } from './components/Icons'
 import { Navbar } from './components/Navbar'
@@ -9,7 +10,17 @@ import { ContactSection } from './components/ContactSection'
 import { Footer } from './components/Footer'
 import { PERSONAL_INFO } from './data/portfolioData'
 
+const TECH_FONTS = [
+  { id: 'space', name: 'Tech Modern (Space Grotesk)', className: 'font-tech-space' },
+  { id: 'syne', name: 'Geometric Wide (Syne)', className: 'font-tech-syne' },
+  { id: 'unbounded', name: 'Futuristic AI (Unbounded)', className: 'font-tech-unbounded' },
+  { id: 'outfit', name: 'Clean Minimal (Outfit)', className: 'font-tech-outfit' },
+  { id: 'jakarta', name: 'Silicon Valley (Jakarta)', className: 'font-tech-jakarta' }
+]
+
 export function App() {
+  const [activeFont, setActiveFont] = useState(TECH_FONTS[0]) // Default: Space Grotesk (Tech Modern)
+
   const handleSmoothScroll = (href: string) => {
     const target = document.querySelector(href)
     if (target) {
@@ -31,10 +42,31 @@ export function App() {
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
             <div className="max-w-4xl">
-              {/* Availability Status Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-300 bg-white/5 border border-white/10 mb-6">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
-                <span>{PERSONAL_INFO.availability}</span>
+              {/* Top Row: Availability Status Badge + Quick Font Style Presets */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-300 bg-white/5 border border-white/10">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
+                  <span>{PERSONAL_INFO.availability}</span>
+                </div>
+
+                {/* Instant 1-Click Font Switcher for FULL STACK DEVELOPMENT */}
+                <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/5 border border-white/10">
+                  <span className="text-[10px] font-mono text-zinc-400 pl-2 pr-1">Headline Style:</span>
+                  {TECH_FONTS.map((font) => (
+                    <button
+                      key={font.id}
+                      onClick={() => setActiveFont(font)}
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono transition-all ${
+                        activeFont.id === font.id
+                          ? 'bg-emerald-500 text-black font-bold shadow-sm'
+                          : 'text-zinc-400 hover:text-white hover:bg-white/10'
+                      }`}
+                      title={font.name}
+                    >
+                      {font.id.charAt(0).toUpperCase() + font.id.slice(1)}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {/* Name in Green (standard clean mono) */}
@@ -42,8 +74,8 @@ export function App() {
                 Muhammad Talha Anjum
               </div>
 
-              {/* FULL STACK DEVELOPMENT in Annez font only */}
-              <h1 className="font-annez text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white tracking-wide uppercase leading-[0.92] mb-6">
+              {/* FULL STACK DEVELOPMENT strictly in the selected modern tech font only */}
+              <h1 className={`${activeFont.className} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white uppercase leading-[0.92] mb-6 tracking-tight`}>
                 FULL STACK DEVELOPMENT
               </h1>
 

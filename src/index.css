@@ -45,30 +45,35 @@
   }
 }
 
-/* Custom Font Definition for Annez (New Classic Bold Typeface by Viswal Studio) */
-@font-face {
-  font-family: 'Annez';
-  src: local('Annez Bold'),
-       local('Annez-Bold'),
-       local('Annez Regular'),
-       local('Annez-Regular'),
-       local('Annez'),
-       url('/fonts/Annez.woff2') format('woff2'),
-       url('/fonts/Annez.woff') format('woff'),
-       url('/fonts/Annez.otf') format('opentype'),
-       url('/fonts/Annez.ttf') format('truetype');
-  font-weight: 700 900;
-  font-style: normal;
-  font-display: swap;
+/* Modern High-Tech Developer Typography strictly for FULL STACK DEVELOPMENT */
+.font-tech-space {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.04em;
+  font-weight: 700;
 }
 
-/* Dedicated styling class strictly for FULL STACK DEVELOPMENT only */
-.font-annez {
-  font-family: 'Annez', 'Cinzel Decorative', 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+.font-tech-syne {
+  font-family: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+.font-tech-unbounded {
+  font-family: 'Unbounded', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.font-tech-outfit {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.04em;
   font-weight: 900;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-feature-settings: "swsh" 1, "calt" 1;
+}
+
+.font-tech-jakarta {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.045em;
+  font-weight: 800;
 }
 
 /* Accessibility: Respect prefers-reduced-motion */
