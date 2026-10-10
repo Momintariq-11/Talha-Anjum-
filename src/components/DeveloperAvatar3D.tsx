@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Play, Pause, Volume2, VolumeX, Mic } from 'lucide-react'
-import { voiceIntroManager, INTRO_SCRIPT } from './VoiceIntroController'
-import type { VoiceState } from './VoiceIntroController'
+import { voiceIntroManager, INTRO_SCRIPT, VOICE_PROFILES } from './VoiceIntroController'
+import type { VoiceState, VoiceProfileId } from './VoiceIntroController'
 
 interface DeveloperAvatar3DProps {
   className?: string
@@ -13,8 +13,8 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
   const [isGreeting, setIsGreeting] = useState(false)
   const [mouthOpen, setMouthOpen] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+  const [currentProfileId, setCurrentProfileId] = useState<VoiceProfileId>('daniel')
   const [transcript, setTranscript] = useState<string>('')
-  const [transform3D, setTransform3D] = useState<string>('')
 
   // Pre-load all avatar animation states for instantaneous zero-flicker transitions
   useEffect(() => {
@@ -29,6 +29,7 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
       setIsPaused(state.isPaused)
       setIsGreeting(Boolean(state.isGreeting))
       setMouthOpen(Boolean(state.mouthOpen))
+      setCurrentProfileId(state.currentProfileId)
       if (state.progressText) {
         setTranscript(state.progressText)
       } else if (!state.isSpeaking) {
@@ -40,21 +41,6 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
       voiceIntroManager.stop()
     }
   }, [])
-
-  // Mouse Parallax for subtle 3D depth
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = e.currentTarget
-    const rect = card.getBoundingClientRect()
-    const x = e.clientX - rect.left - rect.width / 2
-    const y = e.clientY - rect.top - rect.height / 2
-    const rotX = -(y / rect.height) * 8
-    const rotY = (x / rect.width) * 8
-    setTransform3D(`perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`)
-  }
-
-  const handleMouseLeave = () => {
-    setTransform3D('perspective(900px) rotateX(0deg) rotateY(0deg)')
-  }
 
   const handleTogglePlay = () => {
     if (isSpeaking) {
@@ -69,9 +55,13 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
     setIsMuted(muted)
   }
 
-  // Active posture and lip-sync state:
-  // 1. Initial greeting: Waving arm ("Hello, I am Muhammad Talha Anjum")
-  // 2. While speaking: Animates mouth between open & closed in sync with speech so lips visibly move!
+  const handleProfileChange = (id: VoiceProfileId) => {
+    voiceIntroManager.setProfile(id)
+  }
+
+  // Active posture and lip-sync state (All images share exact same white polo, maroon collar, and blue jeans):
+  // 1. Initial greeting: Waving arm greeting ("Hello, I am Muhammad Talha Anjum")
+  // 2. While speaking: Animates mouth between open & closed in sync with speech
   // 3. Paused / Idle: Standing hands clasped together in poised Snapchat-style posture
   const getAvatarImageSrc = () => {
     if (isGreeting) {
@@ -83,18 +73,12 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
     return '/talha-avatar-idle.jpg'
   }
 
+  const activeProfile = VOICE_PROFILES.find((p) => p.id === currentProfileId) || VOICE_PROFILES[0]
+
   return (
     <div className={`relative w-full flex flex-col items-center select-none ${className}`}>
-      {/* 3D Grounded Stage Card */}
-      <div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          transform: transform3D,
-          transition: 'transform 0.15s ease-out'
-        }}
-        className="relative w-full max-w-md rounded-2xl bg-[#0d1117] border border-white/10 p-6 shadow-xl flex flex-col items-center overflow-hidden"
-      >
+      {/* Grounded Stage Plate (Stationary, Solid, No Cursor Tracking) */}
+      <div className="relative w-full max-w-md rounded-2xl bg-[#0d1117] border border-white/10 p-6 shadow-xl flex flex-col items-center">
         {/* Top Header Label */}
         <div className="w-full flex items-center justify-between pb-3.5 border-b border-white/[0.08] mb-4">
           <div className="flex items-center gap-2">
@@ -118,27 +102,25 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
               </div>
             )}
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400">
-              {isSpeaking ? 'Live Voice' : isPaused ? 'Paused' : 'Interactive'}
+              {isSpeaking ? 'Speaking' : isPaused ? 'Paused' : 'Ready'}
             </span>
           </div>
         </div>
 
-        {/* Standing Character Display with Living Lip Sync */}
+        {/* Standing Character Display (Consistent White Polo & Blue Jeans) */}
         <div className="relative w-full flex flex-col items-center justify-center my-2 min-h-[440px]">
           <div className="relative w-full max-w-[280px] h-[440px] flex items-center justify-center">
             <img
               key={getAvatarImageSrc()}
               src={getAvatarImageSrc()}
               alt="Muhammad Talha Anjum Standing 3D Avatar"
-              className={`w-full h-full object-contain select-none pointer-events-none transition-transform duration-150 ${
-                isGreeting ? 'scale-[1.02]' : isSpeaking ? 'scale-[1.01]' : 'scale-100'
-              }`}
+              className="w-full h-full object-contain select-none pointer-events-none"
               onError={(e) => {
                 e.currentTarget.src = '/talha-avatar-idle.jpg'
               }}
             />
 
-            {/* Speaking Audio Wave Badge */}
+            {/* Speaking Audio Indicator */}
             {isSpeaking && (
               <div className="absolute top-3 right-2 px-2.5 py-1 rounded-full bg-black/80 border border-emerald-500/40 text-[10px] font-mono text-emerald-400 flex items-center gap-1.5 shadow-lg">
                 <Mic className="w-3 h-3 text-emerald-400 animate-pulse" />
@@ -205,14 +187,45 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
           </button>
         </div>
 
-        {/* Live Subtitle Transcript Caption */}
-        {(isSpeaking || isPaused) && (
-          <div className="w-full mt-3 p-3 rounded-xl bg-black/60 border border-white/10 text-xs text-zinc-300 leading-relaxed">
-            <p className="italic text-zinc-300">
-              "{transcript || INTRO_SCRIPT}"
-            </p>
+        {/* Voice Profile Selector Pills */}
+        <div className="w-full mt-3 pt-3 border-t border-white/[0.06] flex items-center justify-between">
+          <span className="text-[10px] font-mono text-zinc-500">
+            Tone: <span className="text-zinc-300 font-semibold">{activeProfile.accent}</span>
+          </span>
+          <div className="flex items-center gap-1">
+            {VOICE_PROFILES.map((prof) => (
+              <button
+                key={prof.id}
+                onClick={() => handleProfileChange(prof.id)}
+                className={`px-2 py-1 rounded text-[10px] font-mono transition-colors border ${
+                  currentProfileId === prof.id
+                    ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50 font-semibold'
+                    : 'bg-white/5 text-zinc-400 border-white/10 hover:text-white'
+                }`}
+                title={`${prof.label} (${prof.accent}) - ${prof.description}`}
+              >
+                {prof.label}
+              </button>
+            ))}
           </div>
-        )}
+        </div>
+
+        {/* Live Subtitle Transcript Caption — Expands ONLY when talking */}
+        <div
+          className={`w-full transition-all duration-300 ease-in-out ${
+            isSpeaking || isPaused
+              ? 'max-h-48 opacity-100 mt-3'
+              : 'max-h-0 opacity-0 overflow-hidden m-0 p-0 border-0'
+          }`}
+        >
+          {(isSpeaking || isPaused) && (
+            <div className="w-full p-3 rounded-xl bg-black/60 border border-white/10 text-xs text-zinc-300 leading-relaxed">
+              <p className="italic text-zinc-300">
+                "{transcript || INTRO_SCRIPT}"
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

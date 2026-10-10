@@ -1,8 +1,50 @@
 // Web Speech Synthesis Controller for Muhammad Talha Anjum's Voice Intro
-// Configured STRICTLY for authentic, articulate MALE voice profile with anti-stall safeguards
+// Configured STRICTLY for authentic, articulate MALE voice profiles with anti-stall safeguards
 
 export const INTRO_SCRIPT =
   "Hello, I am Muhammad Talha Anjum, an Artificial Intelligence student and Full-Stack Developer from Pakistan. I specialize in building practical intelligent applications with Python and the Gemini API, full-stack web platforms using Next.js and PostgreSQL, and driving digital growth through targeted Meta Ads. Explore my work below, or let's connect to build something impactful."
+
+export type VoiceProfileId = 'daniel' | 'alex' | 'rishi'
+
+export interface VoiceProfile {
+  id: VoiceProfileId
+  label: string
+  accent: string
+  description: string
+  keywords: string[]
+  pitch: number
+  rate: number
+}
+
+export const VOICE_PROFILES: VoiceProfile[] = [
+  {
+    id: 'daniel',
+    label: 'Daniel',
+    accent: 'UK English',
+    description: 'Executive & articulate baritone (Recommended)',
+    keywords: ['Daniel', 'Google UK English Male', 'Oliver', 'George', 'en-GB'],
+    pitch: 0.98,
+    rate: 1.0
+  },
+  {
+    id: 'alex',
+    label: 'Alex / Eddy',
+    accent: 'US English',
+    description: 'Modern, friendly product developer',
+    keywords: ['Alex', 'Eddy', 'Fred', 'Google US English Male', 'Microsoft David', 'Microsoft Mark', 'en-US'],
+    pitch: 1.0,
+    rate: 1.02
+  },
+  {
+    id: 'rishi',
+    label: 'Rishi',
+    accent: 'South Asian',
+    description: 'Authentic regional cadence & clear delivery',
+    keywords: ['Rishi', 'Aman', 'en-IN', 'en_IN'],
+    pitch: 1.0,
+    rate: 1.0
+  }
+]
 
 export interface VoiceState {
   isSpeaking: boolean
@@ -10,6 +52,7 @@ export interface VoiceState {
   progressText?: string
   isGreeting?: boolean
   mouthOpen?: boolean
+  currentProfileId: VoiceProfileId
 }
 
 // Global reference to prevent Chrome's V8 garbage-collecting the utterance mid-speech
@@ -26,6 +69,7 @@ export class VoiceIntroManager {
   private isMuted = false
   private isGreeting = false
   private mouthOpen = false
+  private activeProfileId: VoiceProfileId = 'daniel'
   private greetingTimer: number | null = null
   private resumeHeartbeatTimer: number | null = null
   private lipSyncTimer: number | null = null
@@ -44,11 +88,25 @@ export class VoiceIntroManager {
     this.onStateChange = listener
   }
 
+  public setProfile(profileId: VoiceProfileId) {
+    this.activeProfileId = profileId
+    if (this.isSpeaking) {
+      this.stop()
+      this.play()
+    } else {
+      this.notify()
+    }
+  }
+
+  public getActiveProfile(): VoiceProfile {
+    return VOICE_PROFILES.find((p) => p.id === this.activeProfileId) || VOICE_PROFILES[0]
+  }
+
   /**
-   * Strictly filters and selects an articulate, natural MALE voice.
+   * Strictly filters and selects an articulate, natural MALE voice according to selected profile.
    * Explicitly purges all female voices (Samantha, Victoria, Karen, etc.)
    */
-  public pickBestVoice(): SpeechSynthesisVoice | null {
+  public pickBestVoice(profileId: VoiceProfileId = this.activeProfileId): SpeechSynthesisVoice | null {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return null
     const voices = window.speechSynthesis.getVoices()
     if (!voices || !voices.length) return null
@@ -66,27 +124,12 @@ export class VoiceIntroManager {
       return femaleNames.some((female) => lower.includes(female))
     }
 
-    // High-priority male voices known for natural resonance and masculine tone
-    const preferredMaleNames = [
-      'Daniel',                  // macOS British Male (natural, articulate baritone)
-      'Eddy',                    // macOS US/UK Male
-      'Alex',                    // macOS Classic Male
-      'Fred',                    // macOS US Male
-      'Reed',                    // macOS Male
-      'Rishi',                   // English (India) Male
-      'Aman',                    // English (India) Male
-      'Google UK English Male',  // Chrome UK Male
-      'Google US English Male',  // Chrome US Male
-      'Microsoft David',         // Windows Male
-      'Microsoft Mark',          // Windows Male
-      'Microsoft Guy',           // Windows Male
-      'Male'
-    ]
+    const targetProfile = VOICE_PROFILES.find((p) => p.id === profileId) || VOICE_PROFILES[0]
 
-    // 1. Check priority male voices first
-    for (const name of preferredMaleNames) {
+    // 1. Search for profile's specific target keywords among non-female voices
+    for (const kw of targetProfile.keywords) {
       const match = voices.find(
-        (v) => !isFemale(v) && v.name.toLowerCase().includes(name.toLowerCase()) && v.lang.startsWith('en')
+        (v) => !isFemale(v) && v.name.toLowerCase().includes(kw.toLowerCase())
       )
       if (match) return match
     }
@@ -95,7 +138,7 @@ export class VoiceIntroManager {
     const englishMale = voices.find((v) => v.lang.startsWith('en') && !isFemale(v))
     if (englishMale) return englishMale
 
-    // 3. Any non-female voice
+    // 3. Fallback: Any non-female voice
     const anyMale = voices.find((v) => !isFemale(v))
     if (anyMale) return anyMale
 
@@ -124,14 +167,14 @@ export class VoiceIntroManager {
     this.utterance = utterance
     window.__talhaActiveUtterance = utterance // Retain on window to defeat Chrome GC bug
 
-    const voice = this.pickBestVoice()
+    const profile = this.getActiveProfile()
+    const voice = this.pickBestVoice(profile.id)
     if (voice) {
       utterance.voice = voice
     }
 
-    // Natural masculine pitch and articulate delivery speed
-    utterance.pitch = 0.98 // Grounded, clear male pitch
-    utterance.rate = 1.0   // Natural conversational cadence
+    utterance.pitch = profile.pitch
+    utterance.rate = profile.rate
     utterance.volume = this.isMuted ? 0 : 1.0
 
     utterance.onstart = () => {
@@ -159,7 +202,6 @@ export class VoiceIntroManager {
     }
 
     utterance.onboundary = (e) => {
-      // Mouth movement on word boundaries
       this.mouthOpen = !this.mouthOpen
       if (e.charIndex !== undefined) {
         const spokenSoFar = INTRO_SCRIPT.slice(0, e.charIndex + (e.charLength || 10))
@@ -269,6 +311,7 @@ export class VoiceIntroManager {
         isPaused: this.isPaused,
         isGreeting: this.isGreeting,
         mouthOpen: this.mouthOpen,
+        currentProfileId: this.activeProfileId,
         progressText: progressText || (this.isSpeaking ? INTRO_SCRIPT : undefined)
       })
     }
