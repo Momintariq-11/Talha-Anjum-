@@ -3,19 +3,13 @@ import { X, ExternalLink, CheckCircle, Layers } from 'lucide-react'
 import type { Project } from '../data/portfolioData'
 import { GithubIcon } from './Icons'
 import { ProjectMockup } from './ProjectMockups'
-import { soundFx } from './SoundController'
 
 interface ProjectModalProps {
   project: Project | null
   onClose: () => void
-  soundEnabled: boolean
 }
 
-export const ProjectModal: React.FC<ProjectModalProps> = ({
-  project,
-  onClose,
-  soundEnabled
-}) => {
+export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   if (!project) return null
 
   return (
@@ -26,10 +20,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       >
         {/* Modal Close Button */}
         <button
-          onClick={() => {
-            if (soundEnabled) soundFx.click()
-            onClose()
-          }}
+          onClick={onClose}
           className="absolute top-5 right-5 p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10 transition-colors"
           aria-label="Close Project Modal"
         >
@@ -38,11 +29,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
         {/* Category & Badge */}
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-blue-400 px-2 py-0.5 rounded bg-blue-600/10 border border-blue-500/20">
+          <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
             {project.category}
           </span>
           {project.badgeLabel && (
-            <span className="text-[10px] font-mono text-[#87834F] px-2 py-0.5 rounded bg-white/5 border border-white/10">
+            <span className="text-[10px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-white/5 border border-white/10">
               {project.badgeLabel}
             </span>
           )}
@@ -64,13 +55,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         {/* Architecture Highlights */}
         <div className="mb-5 bg-black/40 rounded-xl p-4 border border-white/[0.08]">
           <h4 className="text-xs font-mono uppercase tracking-wider text-white flex items-center gap-1.5 mb-3 font-semibold">
-            <Layers className="w-3.5 h-3.5 text-blue-400" />
+            <Layers className="w-3.5 h-3.5 text-emerald-400" />
             Key Architecture Features
           </h4>
           <div className="space-y-1.5 text-xs text-zinc-300 font-mono">
             {project.architectureHighlights.map((feat) => (
               <div key={feat} className="flex items-start gap-2">
-                <CheckCircle className="w-3.5 h-3.5 text-[#87834F] mt-0.5 shrink-0" />
+                <CheckCircle className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" />
                 <span>{feat}</span>
               </div>
             ))}
@@ -96,7 +87,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               href={project.liveDemoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs tracking-wide transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs tracking-wide transition-colors flex items-center gap-1.5"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               Live Demo

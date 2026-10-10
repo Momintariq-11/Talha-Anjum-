@@ -4,13 +4,8 @@ import { PROJECTS_DATA } from '../data/portfolioData'
 import type { Project } from '../data/portfolioData'
 import { ProjectMockup } from './ProjectMockups'
 import { ProjectModal } from './ProjectModal'
-import { soundFx } from './SoundController'
 
-interface ProjectsSectionProps {
-  soundEnabled: boolean
-}
-
-export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }) => {
+export const ProjectsSection: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>('all')
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null)
 
@@ -34,7 +29,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-400 bg-white/5 border border-white/10 uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               Selected Work
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
@@ -51,13 +46,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }
           {filterTabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => {
-                setSelectedFilter(tab.id)
-                if (soundEnabled) soundFx.click()
-              }}
+              onClick={() => setSelectedFilter(tab.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
                 selectedFilter === tab.id
-                  ? 'bg-blue-600 text-white border-blue-500 font-semibold'
+                  ? 'bg-emerald-600 text-black border-emerald-500 font-bold'
                   : 'bg-[#0d1117] text-zinc-400 border-white/10 hover:text-white hover:border-white/20'
               }`}
             >
@@ -71,8 +63,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }
           {filteredProjects.map((project) => (
             <article
               key={project.id}
-              onMouseEnter={() => soundEnabled && soundFx.hover()}
-              className="rounded-xl p-5 bg-[#0d1117] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+              className="rounded-xl p-5 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group"
             >
               <div>
                 {/* Visual Preview */}
@@ -82,18 +73,18 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }
 
                 {/* Category & Badge */}
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400 font-semibold px-2 py-0.5 rounded bg-blue-600/10 border border-blue-500/20">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
                     {project.category}
                   </span>
                   {project.badgeLabel && (
-                    <span className="text-[10px] font-mono text-[#87834F] px-2 py-0.5 rounded bg-white/5 border border-white/10">
+                    <span className="text-[10px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-white/5 border border-white/10">
                       {project.badgeLabel}
                     </span>
                   )}
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-bold text-white mb-2">
+                <h3 className="text-base font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
                   {project.title}
                 </h3>
 
@@ -123,7 +114,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }
                       href={project.liveDemoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
+                      className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors"
                     >
                       <span>Live Demo</span>
                       <ExternalLink className="w-3 h-3" />
@@ -150,10 +141,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }
                 </div>
 
                 <button
-                  onClick={() => {
-                    setActiveModalProject(project)
-                    if (soundEnabled) soundFx.click()
-                  }}
+                  onClick={() => setActiveModalProject(project)}
                   className="p-1.5 rounded bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10 transition-colors"
                   title="Inspect architecture details"
                 >
@@ -169,7 +157,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ soundEnabled }
       <ProjectModal
         project={activeModalProject}
         onClose={() => setActiveModalProject(null)}
-        soundEnabled={soundEnabled}
       />
     </section>
   )

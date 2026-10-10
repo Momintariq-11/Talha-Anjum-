@@ -2,15 +2,13 @@
 
 @layer base {
   :root {
-    --bg: #07090e;
+    --bg: #08090d;
     --bg-card: #0d1117;
-    --bg-card-hover: #131822;
+    --bg-card-hover: #121722;
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.18);
-    --blue: #2563eb;
-    --blue-light: #3b82f6;
-    --accent: #87834F;
-    --accent-light: #9e9a64;
+    --emerald: #10b981;
+    --emerald-light: #34d399;
     --text: #f4f4f6;
     --text-muted: #8b949e;
   }
@@ -36,14 +34,14 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #07090e;
+    background: #08090d;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1f242d;
+    background: #1c222d;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
+    background: #10b981;
   }
 }
 

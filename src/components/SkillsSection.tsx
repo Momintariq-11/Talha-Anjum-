@@ -1,33 +1,28 @@
 import React, { useState } from 'react'
 import { Terminal, Code2, Cpu, Database, Brain, GitBranch, Megaphone, CheckCircle } from 'lucide-react'
 import { TECHNICAL_SKILLS } from '../data/portfolioData'
-import { soundFx } from './SoundController'
 
-interface SkillsSectionProps {
-  soundEnabled: boolean
-}
-
-export const SkillsSection: React.FC<SkillsSectionProps> = ({ soundEnabled }) => {
+export const SkillsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all')
 
   const getSkillIcon = (iconName: string) => {
     switch (iconName) {
       case 'Terminal':
-        return <Terminal className="w-5 h-5 text-blue-400" />
+        return <Terminal className="w-5 h-5 text-emerald-400" />
       case 'Code2':
-        return <Code2 className="w-5 h-5 text-blue-400" />
+        return <Code2 className="w-5 h-5 text-emerald-400" />
       case 'Cpu':
-        return <Cpu className="w-5 h-5 text-[#87834F]" />
+        return <Cpu className="w-5 h-5 text-white" />
       case 'Database':
-        return <Database className="w-5 h-5 text-white" />
+        return <Database className="w-5 h-5 text-emerald-400" />
       case 'Brain':
-        return <Brain className="w-5 h-5 text-[#87834F]" />
+        return <Brain className="w-5 h-5 text-white" />
       case 'GitBranch':
         return <GitBranch className="w-5 h-5 text-zinc-300" />
       case 'Megaphone':
-        return <Megaphone className="w-5 h-5 text-blue-400" />
+        return <Megaphone className="w-5 h-5 text-emerald-400" />
       default:
-        return <Code2 className="w-5 h-5 text-blue-400" />
+        return <Code2 className="w-5 h-5 text-emerald-400" />
     }
   }
 
@@ -63,7 +58,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ soundEnabled }) =>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-400 bg-white/5 border border-white/10 uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               What I Use
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
@@ -80,13 +75,10 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ soundEnabled }) =>
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => {
-                setActiveCategory(cat.id)
-                if (soundEnabled) soundFx.click()
-              }}
+              onClick={() => setActiveCategory(cat.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
                 activeCategory === cat.id
-                  ? 'bg-blue-600 text-white border-blue-500 font-semibold'
+                  ? 'bg-emerald-600 text-black border-emerald-500 font-bold'
                   : 'bg-[#0d1117] text-zinc-400 border-white/10 hover:text-white hover:border-white/20'
               }`}
             >
@@ -100,16 +92,15 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ soundEnabled }) =>
           {filteredSkills.map((skill) => (
             <div
               key={skill.title}
-              onMouseEnter={() => soundEnabled && soundFx.hover()}
-              className="rounded-xl p-5 bg-[#0d1117] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+              className="rounded-xl p-5 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-500/40 transition-colors">
                     {getSkillIcon(skill.icon)}
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-white">
+                    <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
                       {skill.title}
                     </h3>
                     <span className="text-[11px] font-mono text-zinc-400 block">
@@ -120,7 +111,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ soundEnabled }) =>
 
                 <div className="bg-black/40 rounded-lg p-2.5 border border-white/[0.06] mb-3">
                   <span className="text-xs text-zinc-300 font-mono flex items-center gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-[#87834F] shrink-0" />
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     <span>{skill.skills}</span>
                   </span>
                 </div>

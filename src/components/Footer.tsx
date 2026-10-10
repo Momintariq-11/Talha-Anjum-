@@ -2,15 +2,9 @@ import React from 'react'
 import { ArrowUp, Mail, Phone } from 'lucide-react'
 import { PERSONAL_INFO } from '../data/portfolioData'
 import { GithubIcon } from './Icons'
-import { soundFx } from './SoundController'
 
-interface FooterProps {
-  soundEnabled: boolean
-}
-
-export const Footer: React.FC<FooterProps> = ({ soundEnabled }) => {
+export const Footer: React.FC = () => {
   const scrollToTop = () => {
-    if (soundEnabled) soundFx.click()
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 

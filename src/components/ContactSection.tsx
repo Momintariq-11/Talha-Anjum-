@@ -2,13 +2,8 @@ import React, { useState } from 'react'
 import { Mail, Phone, Send, Copy, Check, MessageSquare, MapPin, ExternalLink } from 'lucide-react'
 import { PERSONAL_INFO } from '../data/portfolioData'
 import { GithubIcon } from './Icons'
-import { soundFx } from './SoundController'
 
-interface ContactSectionProps {
-  soundEnabled: boolean
-}
-
-export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) => {
+export const ContactSection: React.FC = () => {
   const [copiedEmail, setCopiedEmail] = useState(false)
   const [copiedPhone, setCopiedPhone] = useState(false)
 
@@ -20,20 +15,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.contact.email)
     setCopiedEmail(true)
-    if (soundEnabled) soundFx.click()
     setTimeout(() => setCopiedEmail(false), 2000)
   }
 
   const handleCopyPhone = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.contact.phone)
     setCopiedPhone(true)
-    if (soundEnabled) soundFx.click()
     setTimeout(() => setCopiedPhone(false), 2000)
   }
 
   const handleSendEmail = (e: React.FormEvent) => {
     e.preventDefault()
-    if (soundEnabled) soundFx.click()
 
     const subject = encodeURIComponent(`Project Inquiry: ${projectType} - from ${clientName || 'Collaborator'}`)
     const body = encodeURIComponent(
@@ -46,7 +38,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
   }
 
   const handleSendWhatsApp = () => {
-    if (soundEnabled) soundFx.click()
     const text = encodeURIComponent(
       `Hi Talha! I came across your portfolio. I'm interested in working with you on ${projectType}. ${message ? `Note: "${message}"` : ''}`
     )
@@ -59,7 +50,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
         {/* Section Header */}
         <div className="max-w-2xl mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-400 bg-white/5 border border-white/10 uppercase mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             Contact
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
@@ -86,14 +77,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                 {/* Email Direct */}
                 <div className="p-3.5 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-blue-400">
+                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
                       <Mail className="w-4 h-4" />
                     </div>
                     <div>
                       <span className="text-[10px] font-mono text-zinc-500 block">Email</span>
                       <a
                         href={`mailto:${PERSONAL_INFO.contact.email}`}
-                        className="text-xs sm:text-sm font-medium text-white hover:text-blue-400 transition-colors"
+                        className="text-xs sm:text-sm font-medium text-white hover:text-emerald-400 transition-colors"
                       >
                         {PERSONAL_INFO.contact.email}
                       </a>
@@ -104,21 +95,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                     className="p-1.5 rounded bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
                     title="Copy Email"
                   >
-                    {copiedEmail ? <Check className="w-3.5 h-3.5 text-[#87834F]" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
 
                 {/* Phone / WhatsApp */}
                 <div className="p-3.5 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#87834F]">
+                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
                       <Phone className="w-4 h-4" />
                     </div>
                     <div>
                       <span className="text-[10px] font-mono text-zinc-500 block">Phone / WhatsApp</span>
                       <a
                         href={PERSONAL_INFO.contact.phoneTel}
-                        className="text-xs sm:text-sm font-medium text-white hover:text-[#87834F] transition-colors"
+                        className="text-xs sm:text-sm font-medium text-white hover:text-emerald-400 transition-colors"
                       >
                         {PERSONAL_INFO.contact.phone}
                       </a>
@@ -129,7 +120,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                     className="p-1.5 rounded bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
                     title="Copy Phone"
                   >
-                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-[#87834F]" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
 
@@ -145,7 +136,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                         href={PERSONAL_INFO.contact.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs sm:text-sm font-medium text-white hover:text-blue-400 transition-colors"
+                        className="text-xs sm:text-sm font-medium text-white hover:text-emerald-400 transition-colors"
                       >
                         github.com/maliktalha2006
                       </a>
@@ -166,7 +157,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
               <div className="mt-5 pt-4 border-t border-white/[0.08] grid grid-cols-3 gap-2">
                 <a
                   href={`mailto:${PERSONAL_INFO.contact.email}`}
-                  className="py-2 text-center rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs transition-colors"
+                  className="py-2 text-center rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-bold text-xs transition-colors"
                 >
                   Email
                 </a>
@@ -180,7 +171,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                 </a>
                 <a
                   href={PERSONAL_INFO.contact.phoneTel}
-                  className="py-2 text-center rounded-lg bg-[#87834F] hover:bg-[#9e9a64] text-white font-medium text-xs transition-colors"
+                  className="py-2 text-center rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-xs transition-colors"
                 >
                   Call / WA
                 </a>
@@ -189,10 +180,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
 
             <div className="rounded-xl p-4 bg-[#0d1117] border border-white/10 text-xs font-mono text-zinc-400 flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-blue-400" />
+                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                 {PERSONAL_INFO.education.location}
               </span>
-              <span className="text-white font-semibold">
+              <span className="text-emerald-400 font-semibold">
                 {PERSONAL_INFO.availability}
               </span>
             </div>
@@ -215,7 +206,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     placeholder="e.g. Sarah Jenkins"
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                   />
                 </div>
 
@@ -233,13 +224,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                       <button
                         type="button"
                         key={type}
-                        onClick={() => {
-                          setProjectType(type)
-                          if (soundEnabled) soundFx.click()
-                        }}
+                        onClick={() => setProjectType(type)}
                         className={`p-2 rounded-lg text-xs font-mono text-center transition-colors border ${
                           projectType === type
-                            ? 'bg-blue-600 text-white border-blue-500 font-semibold'
+                            ? 'bg-emerald-500 text-black border-emerald-400 font-bold'
                             : 'bg-black/30 text-zinc-400 border-white/10 hover:text-white'
                         }`}
                       >
@@ -258,14 +246,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Describe your goals, requirements, or timeline..."
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                   />
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 px-4 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs tracking-wide transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 py-2.5 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs tracking-wide transition-colors flex items-center justify-center gap-2"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>Send via Email</span>
@@ -274,7 +262,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                   <button
                     type="button"
                     onClick={handleSendWhatsApp}
-                    className="py-2.5 px-4 rounded-lg bg-[#87834F] hover:bg-[#9e9a64] text-white font-medium text-xs tracking-wide transition-colors flex items-center justify-center gap-2"
+                    className="py-2.5 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-xs tracking-wide transition-colors flex items-center justify-center gap-2 border border-white/15"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>WhatsApp Direct</span>
@@ -282,7 +270,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
                 </div>
 
                 {submitted && (
-                  <div className="p-3 rounded-lg bg-blue-900/40 border border-blue-500/40 text-blue-200 text-xs font-mono text-center">
+                  <div className="p-3 rounded-lg bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-mono text-center">
                     Email draft launched! Check your email client to send.
                   </div>
                 )}

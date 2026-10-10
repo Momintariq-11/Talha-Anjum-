@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Volume2, VolumeX, Menu, X, ArrowUpRight } from 'lucide-react'
-import { soundFx } from './SoundController'
+import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { PERSONAL_INFO } from '../data/portfolioData'
 import { GithubIcon } from './Icons'
 
-interface NavbarProps {
-  soundEnabled: boolean
-  toggleSound: () => void
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => {
+export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -47,7 +41,6 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
   ]
 
   const handleLinkClick = (href: string) => {
-    if (soundEnabled) soundFx.click()
     setMobileMenuOpen(false)
     const target = document.querySelector(href)
     if (target) {
@@ -59,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         scrolled
-          ? 'bg-[#07090e]/90 backdrop-blur-md border-b border-white/[0.08] py-3.5 shadow-md'
+          ? 'bg-[#08090d]/90 backdrop-blur-md border-b border-white/[0.08] py-3.5 shadow-md'
           : 'bg-transparent py-5'
       }`}
     >
@@ -70,15 +63,15 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
           onClick={() => handleLinkClick('#home')}
           className="group flex items-center gap-3 select-none"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white group-hover:border-[#87834F] transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white group-hover:border-emerald-500 transition-colors">
             TA
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-sm tracking-tight text-white group-hover:text-blue-400 transition-colors">
-              Talha Anjum
+            <span className="font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+              Muhammad Talha Anjum
             </span>
             <span className="text-[10px] font-mono text-zinc-400">
-              AI & Full-Stack
+              AI & Full-Stack Developer
             </span>
           </div>
         </a>
@@ -109,19 +102,6 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
 
         {/* Right Actions */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Sound toggle */}
-          <button
-            onClick={toggleSound}
-            className="p-2 rounded-lg bg-[#0d1117] border border-white/10 text-zinc-400 hover:text-white transition-colors"
-            title={soundEnabled ? 'Mute audio' : 'Enable audio'}
-          >
-            {soundEnabled ? (
-              <Volume2 className="w-4 h-4 text-[#87834F]" />
-            ) : (
-              <VolumeX className="w-4 h-4" />
-            )}
-          </button>
-
           {/* GitHub Link */}
           <a
             href={PERSONAL_INFO.contact.github}
@@ -140,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
               e.preventDefault()
               handleLinkClick('#contact')
             }}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs tracking-wide transition-colors"
+            className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-semibold text-xs tracking-wide transition-colors"
           >
             Get in Touch
           </a>
@@ -151,6 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg bg-[#0d1117] border border-white/10 text-white"
+            aria-label="Toggle Navigation"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -159,7 +140,7 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#07090e] border-b border-white/10 px-6 py-5">
+        <div className="md:hidden bg-[#08090d] border-b border-white/10 px-6 py-5">
           <div className="flex flex-col gap-3 font-mono text-sm">
             {navLinks.map((link) => (
               <a
@@ -190,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ soundEnabled, toggleSound }) => 
                   e.preventDefault()
                   handleLinkClick('#contact')
                 }}
-                className="flex-1 py-2 text-center rounded-lg bg-blue-600 text-white text-xs font-semibold"
+                className="flex-1 py-2 text-center rounded-lg bg-emerald-500 text-black text-xs font-bold"
               >
                 Contact
               </a>

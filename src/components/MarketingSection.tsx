@@ -1,25 +1,20 @@
 import React, { useState } from 'react'
 import { Target, Smartphone, BarChart3, CheckCircle } from 'lucide-react'
 import { MARKETING_PILLARS } from '../data/portfolioData'
-import { soundFx } from './SoundController'
 
-interface MarketingSectionProps {
-  soundEnabled: boolean
-}
-
-export const MarketingSection: React.FC<MarketingSectionProps> = ({ soundEnabled }) => {
+export const MarketingSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'pipeline' | 'ads' | 'cadence'>('pipeline')
 
   const getPillarIcon = (iconName: string) => {
     switch (iconName) {
       case 'Target':
-        return <Target className="w-5 h-5 text-blue-400" />
+        return <Target className="w-5 h-5 text-emerald-400" />
       case 'Smartphone':
-        return <Smartphone className="w-5 h-5 text-[#87834F]" />
+        return <Smartphone className="w-5 h-5 text-emerald-400" />
       case 'BarChart3':
         return <BarChart3 className="w-5 h-5 text-white" />
       default:
-        return <BarChart3 className="w-5 h-5 text-blue-400" />
+        return <BarChart3 className="w-5 h-5 text-emerald-400" />
     }
   }
 
@@ -30,7 +25,7 @@ export const MarketingSection: React.FC<MarketingSectionProps> = ({ soundEnabled
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-400 bg-white/5 border border-white/10 uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#87834F]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               Digital Growth
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
@@ -47,15 +42,14 @@ export const MarketingSection: React.FC<MarketingSectionProps> = ({ soundEnabled
           {MARKETING_PILLARS.map((pillar) => (
             <div
               key={pillar.title}
-              onMouseEnter={() => soundEnabled && soundFx.hover()}
-              className="rounded-xl p-6 bg-[#0d1117] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+              className="rounded-xl p-6 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-emerald-500/40 transition-colors">
                   {getPillarIcon(pillar.icon)}
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-2">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
                   {pillar.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-light mb-5">
@@ -65,7 +59,7 @@ export const MarketingSection: React.FC<MarketingSectionProps> = ({ soundEnabled
                 <div className="space-y-2 mb-6 font-mono text-xs text-zinc-400">
                   {pillar.deliverables.map((item) => (
                     <div key={item} className="flex items-center gap-2">
-                      <CheckCircle className="w-3.5 h-3.5 text-[#87834F] shrink-0" />
+                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -100,39 +94,30 @@ export const MarketingSection: React.FC<MarketingSectionProps> = ({ soundEnabled
 
             <div className="flex items-center gap-1 bg-black/40 p-1 rounded-lg border border-white/10">
               <button
-                onClick={() => {
-                  setActiveTab('pipeline')
-                  if (soundEnabled) soundFx.click()
-                }}
+                onClick={() => setActiveTab('pipeline')}
                 className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
                   activeTab === 'pipeline'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-emerald-600 text-black font-bold'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
                 Funnel Steps
               </button>
               <button
-                onClick={() => {
-                  setActiveTab('ads')
-                  if (soundEnabled) soundFx.click()
-                }}
+                onClick={() => setActiveTab('ads')}
                 className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
                   activeTab === 'ads'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-emerald-600 text-black font-bold'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
                 Ads Strategy
               </button>
               <button
-                onClick={() => {
-                  setActiveTab('cadence')
-                  if (soundEnabled) soundFx.click()
-                }}
+                onClick={() => setActiveTab('cadence')}
                 className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
                   activeTab === 'cadence'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-emerald-600 text-black font-bold'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
@@ -145,12 +130,12 @@ export const MarketingSection: React.FC<MarketingSectionProps> = ({ soundEnabled
             {activeTab === 'pipeline' && (
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="p-4 rounded-lg bg-black/40 border border-white/[0.06]">
-                  <span className="text-[10px] font-mono text-[#87834F] block mb-1">01 / AUDIENCE</span>
+                  <span className="text-[10px] font-mono text-emerald-400 block mb-1">01 / AUDIENCE</span>
                   <h4 className="text-white font-bold text-sm mb-1">Audience Discovery</h4>
                   <p className="text-xs text-zinc-400">Targeting niches, demographics, and lookalike parameters.</p>
                 </div>
                 <div className="p-4 rounded-lg bg-black/40 border border-white/[0.06]">
-                  <span className="text-[10px] font-mono text-blue-400 block mb-1">02 / CREATIVE</span>
+                  <span className="text-[10px] font-mono text-emerald-400 block mb-1">02 / CREATIVE</span>
                   <h4 className="text-white font-bold text-sm mb-1">Creative Production</h4>
                   <p className="text-xs text-zinc-400">Reels, carousel assets, and high-clarity copy variation.</p>
                 </div>
@@ -160,7 +145,7 @@ export const MarketingSection: React.FC<MarketingSectionProps> = ({ soundEnabled
                   <p className="text-xs text-zinc-400">Traffic, lead capture, and dynamic budget allocation.</p>
                 </div>
                 <div className="p-4 rounded-lg bg-black/40 border border-white/[0.06]">
-                  <span className="text-[10px] font-mono text-[#87834F] block mb-1">04 / OPTIMIZE</span>
+                  <span className="text-[10px] font-mono text-emerald-400 block mb-1">04 / OPTIMIZE</span>
                   <h4 className="text-white font-bold text-sm mb-1">Testing & Scaling</h4>
                   <p className="text-xs text-zinc-400">A/B analysis to sustain cost-effective lead generation.</p>
                 </div>
