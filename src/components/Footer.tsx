@@ -1,0 +1,83 @@
+import React from 'react'
+import { ArrowUp, Mail, Phone } from 'lucide-react'
+import { PERSONAL_INFO } from '../data/portfolioData'
+import { GithubIcon } from './Icons'
+import { soundFx } from './SoundController'
+
+interface FooterProps {
+  soundEnabled: boolean
+}
+
+export const Footer: React.FC<FooterProps> = ({ soundEnabled }) => {
+  const scrollToTop = () => {
+    if (soundEnabled) soundFx.click()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  return (
+    <footer className="border-t border-white/[0.08] bg-[#07090e] py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/[0.08]">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white">
+              TA
+            </div>
+            <div>
+              <div className="font-bold text-sm text-white">
+                Muhammad Talha Anjum
+              </div>
+              <div className="text-xs font-mono text-zinc-400">
+                AI & Full-Stack Developer • Social Media Marketing
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href={PERSONAL_INFO.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg bg-white/5 border border-white/10 text-zinc-300 hover:text-white transition-colors"
+              aria-label="GitHub"
+            >
+              <GithubIcon className="w-4 h-4" />
+            </a>
+
+            <a
+              href={`mailto:${PERSONAL_INFO.contact.email}`}
+              className="p-2 rounded-lg bg-white/5 border border-white/10 text-zinc-300 hover:text-white transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="w-4 h-4" />
+            </a>
+
+            <a
+              href={PERSONAL_INFO.contact.phoneTel}
+              className="p-2 rounded-lg bg-white/5 border border-white/10 text-zinc-300 hover:text-white transition-colors"
+              aria-label="Phone"
+            >
+              <Phone className="w-4 h-4" />
+            </a>
+
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-zinc-300 hover:text-white font-mono text-xs transition-colors"
+            >
+              <span>Back to Top</span>
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-500">
+          <div>
+            © 2026 {PERSONAL_INFO.name}. All rights reserved.
+          </div>
+          <div>
+            {PERSONAL_INFO.education.university} • {PERSONAL_INFO.education.location}
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
