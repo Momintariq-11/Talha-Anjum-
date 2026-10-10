@@ -12,16 +12,19 @@ export const Footer: React.FC = () => {
     <footer className="border-t border-white/[0.08] bg-[#07090e] py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/[0.08]">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white mt-0.5">
               TA
             </div>
             <div>
               <div className="font-bold text-sm text-white">
                 Muhammad Talha Anjum
               </div>
-              <div className="text-xs font-mono text-zinc-400">
-                AI & Full-Stack Developer • Social Media Marketing
+              <div className="text-xs font-mono text-emerald-400 font-semibold mt-0.5">
+                CEO & Founder of Studio Vertex Agency
+              </div>
+              <div className="text-xs font-mono text-zinc-400 mt-0.5">
+                AI & Full Stack Developer | Social Media Marketing
               </div>
             </div>
           </div>
