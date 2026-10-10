@@ -56,7 +56,7 @@ export function App() {
                 {/* SOLVIX in Gotham font with Green X */}
                 <div className="w-full mb-3 select-none">
                   <h1 className="font-gotham font-black text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[11.5rem] tracking-tight leading-[0.85] text-white">
-                    Solvi<span className="text-emerald-400">x</span>
+                    Solviq<span className="text-emerald-400">x</span>
                   </h1>
                 </div>
 

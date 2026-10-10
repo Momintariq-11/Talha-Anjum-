@@ -74,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {brandMode === 'solvix' ? (
             <div className="flex flex-col">
               <div className="font-gotham font-black text-2xl tracking-tight text-white group-hover:text-emerald-300 transition-colors flex items-center">
-                <span>Solvi</span>
+                <span>Solviq</span>
                 <span className="text-emerald-400">x</span>
               </div>
               <span className="font-gotham text-[10px] tracking-wide text-zinc-400 font-medium -mt-1">
@@ -147,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                Solvix
+                Solviqx
               </button>
             </div>
           )}
@@ -222,7 +222,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         : 'text-zinc-400'
                     }`}
                   >
-                    Solvix
+                    Solviqx
                   </button>
                 </div>
               </div>

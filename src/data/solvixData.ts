@@ -1,10 +1,10 @@
 import type { Project, SkillCategory, MarketingPillar, ExpertiseCard } from './portfolioData'
 
 export const SOLVIX_INFO = {
-  name: "Solvix",
+  name: "Solviqx",
   tagline: "Your Vision, Our Digital Expertise",
   headline: "Your Vision, Our Digital Expertise.",
-  subheadline: "Solvix is a full-service digital innovation agency specializing in high-performance full-stack web platforms, intelligent AI automation systems, and scalable digital marketing campaigns.",
+  subheadline: "Solviqx is a full-service digital innovation agency specializing in high-performance full-stack web platforms, intelligent AI automation systems, and scalable digital marketing campaigns.",
   aboutPitch: "We engineer scalable digital products and growth engines that help modern brands dominate their markets with speed, precision, and architectural excellence.",
   founder: "Muhammad Talha Anjum",
   founderRole: "Founder & Lead Technical Architect",

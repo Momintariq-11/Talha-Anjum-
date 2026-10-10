@@ -65,7 +65,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </div>
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
               <span className="text-emerald-400 font-semibold">
-                {brandMode === 'solvix' ? 'Solvix Agency' : 'Vertex Studio Agency'}
+                {brandMode === 'solvix' ? 'Solviqx Agency' : 'Vertex Studio Agency'}
               </span>
               <span className="text-zinc-600">•</span>
               <span>{brandMode === 'solvix' ? 'Digital Innovation' : 'CEO & Founder'}</span>

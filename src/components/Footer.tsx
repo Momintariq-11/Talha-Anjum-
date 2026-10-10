@@ -20,7 +20,7 @@ export const Footer: React.FC<FooterProps> = ({ brandMode = 'personal' }) => {
             {brandMode === 'solvix' ? (
               <div>
                 <div className="font-gotham font-black text-xl text-white flex items-center">
-                  <span>Solvi</span>
+                  <span>Solviq</span>
                   <span className="text-emerald-400">x</span>
                 </div>
                 <div className="text-xs font-gotham text-zinc-400 font-medium mt-0.5">
