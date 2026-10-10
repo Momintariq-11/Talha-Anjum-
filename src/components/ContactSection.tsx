@@ -54,10 +54,10 @@ export const ContactSection: React.FC = () => {
             Contact
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
-            Have an Idea? Let’s Build Something Intelligent.
+            Let's work together.
           </h2>
           <p className="text-zinc-400 text-base leading-relaxed">
-            I'm available for remote and freelance opportunities. Tell me what you want to build and let's turn it into a working product.
+            I'm open to remote roles, contract development, and digital marketing projects. Feel free to reach out directly.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export const ContactSection: React.FC = () => {
                 Direct Contact
               </h3>
               <p className="text-xs font-mono text-zinc-500 mb-5">
-                Response within 24 hours
+                Usually responds within 24 hours
               </p>
 
               <div className="space-y-3">
@@ -106,7 +106,7 @@ export const ContactSection: React.FC = () => {
                       <Phone className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono text-zinc-500 block">Phone / WhatsApp (Click to chat)</span>
+                      <span className="text-[10px] font-mono text-zinc-500 block">WhatsApp / Phone</span>
                       <a
                         href={PERSONAL_INFO.contact.whatsapp}
                         target="_blank"
@@ -162,7 +162,7 @@ export const ContactSection: React.FC = () => {
                   href={`mailto:${PERSONAL_INFO.contact.email}`}
                   className="py-2 text-center rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition-colors shadow-sm"
                 >
-                  Email ✉️
+                  Email
                 </a>
                 <a
                   href={PERSONAL_INFO.contact.github}
@@ -178,7 +178,7 @@ export const ContactSection: React.FC = () => {
                   rel="noopener noreferrer"
                   className="py-2 text-center rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-bold text-xs transition-colors"
                 >
-                  WhatsApp 💬
+                  WhatsApp
                 </a>
               </div>
             </div>

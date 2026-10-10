@@ -1,4 +1,4 @@
-import { Send, ArrowDown, Sparkles } from 'lucide-react'
+import { Send, ArrowDown } from 'lucide-react'
 import { GithubIcon } from './components/Icons'
 import { Navbar } from './components/Navbar'
 import { AboutSection } from './components/AboutSection'
@@ -55,11 +55,11 @@ export function App() {
 
             {/* Supporting Professional Subtitle */}
             <p className="text-base sm:text-lg lg:text-xl text-zinc-400 font-light leading-relaxed mb-10 max-w-2xl mx-auto">
-              Architecting production-ready AI systems and scalable web platforms. Leveraging generative models, type-safe full-stack architectures with Next.js & PostgreSQL, and precision digital growth systems to build high-impact digital experiences.
+              Full-stack developer and AI student based in Pakistan. Building clean web applications with Next.js & PostgreSQL, practical AI tools with Python, and performance-driven digital marketing campaigns.
             </p>
 
-            {/* Three Centered Hero CTA Buttons (Minimal, clean, no neon glow) */}
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+            {/* Three Centered Hero CTA Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
               <a
                 href="#projects"
                 onClick={(e) => {
@@ -68,8 +68,8 @@ export function App() {
                 }}
                 className="px-6 py-3.5 rounded-lg font-bold text-xs tracking-wide bg-emerald-500 hover:bg-emerald-400 text-black transition-colors flex items-center gap-2 shadow-sm"
               >
-                <Sparkles className="w-4 h-4" />
-                Explore My Work
+                <span>View Projects</span>
+                <ArrowDown className="w-3.5 h-3.5" />
               </a>
 
               <a
@@ -77,7 +77,7 @@ export function App() {
                 className="px-6 py-3.5 rounded-lg font-semibold text-xs tracking-wide bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-colors flex items-center gap-2"
               >
                 <Send className="w-3.5 h-3.5 text-emerald-400" />
-                Let's Work Together
+                Let's Talk
               </a>
 
               <a
@@ -91,45 +91,14 @@ export function App() {
               </a>
             </div>
 
-            {/* Minimal Standing Avatar Preview Capsule */}
-            <div className="mb-8 p-3 rounded-2xl bg-[#0d1117] border border-white/10 flex items-center gap-4 max-w-md w-full justify-between">
-              <div className="flex items-center gap-3 text-left">
-                <div className="w-12 h-14 rounded-lg bg-[#08090d] border border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
-                  <img
-                    src="/talha-avatar-idle.jpg"
-                    alt="Standing Avatar preview"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-white flex items-center gap-2">
-                    <span>Talha's Standing 3D Avatar</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20">
-                      Waving & Speaking
-                    </span>
-                  </div>
-                  <p className="text-[11px] font-mono text-zinc-400 mt-0.5">
-                    Snapchat-style standing avatar with speech gestures
-                  </p>
-                </div>
-              </div>
-
+            {/* Scroll Down Cue */}
+            <div className="pt-6 border-t border-white/[0.08] w-full max-w-xs mx-auto flex items-center justify-center">
               <button
                 onClick={() => handleSmoothScroll('#about')}
-                className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-mono font-bold transition-colors shrink-0"
+                className="flex items-center gap-2 text-xs font-mono text-zinc-500 hover:text-emerald-400 transition-colors"
               >
-                Meet Avatar ↓
-              </button>
-            </div>
-
-            {/* Scroll Down Invitation */}
-            <div className="pt-4 border-t border-white/[0.08] w-full max-w-md mx-auto flex items-center justify-center gap-3 text-xs font-mono text-zinc-500">
-              <button
-                onClick={() => handleSmoothScroll('#about')}
-                className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 transition-colors"
-              >
-                <ArrowDown className="w-4 h-4 text-emerald-400 animate-bounce" />
-                <span>Scroll down to meet Talha's avatar & verified data</span>
+                <ArrowDown className="w-3.5 h-3.5 text-emerald-400 animate-bounce" />
+                <span>Scroll to explore</span>
               </button>
             </div>
           </div>

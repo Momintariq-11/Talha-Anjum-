@@ -1,5 +1,5 @@
 import React from 'react'
-import { Bot, Zap, Wrench, TrendingUp, CheckCircle2 } from 'lucide-react'
+import { Bot, Zap, Wrench, TrendingUp } from 'lucide-react'
 import { EXPERTISE_CARDS, PERSONAL_INFO } from '../data/portfolioData'
 import { ProfileCard } from './ProfileCard'
 import { DeveloperAvatar3D } from './DeveloperAvatar3D'
@@ -28,7 +28,7 @@ export const AboutSection: React.FC = () => {
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-400 bg-white/5 border border-white/10 uppercase mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              About Me & Digital Avatar
+              About Me
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
               From ideas to working software.
@@ -39,23 +39,23 @@ export const AboutSection: React.FC = () => {
           </p>
         </div>
 
-        {/* ================= DATA ABOUT HIM & 3D FACE AVATAR SHOWCASE ================= */}
+        {/* Data About Him & Avatar Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-20">
-          {/* Left Column: Data & Verified Credentials Card */}
+          {/* Left Column: Data & Credentials Card */}
           <div className="lg:col-span-6">
             <ProfileCard />
           </div>
 
-          {/* Right Column: 3D Face Avatar with Heavy-Voice Speech Intro */}
+          {/* Right Column: Standing Avatar with Audio Intro */}
           <div className="lg:col-span-6">
             <DeveloperAvatar3D />
           </div>
         </div>
 
         {/* 4 Pillars Expertise Grid */}
-        <div className="mb-14">
+        <div>
           <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold mb-4">
-            Core Technical & Growth Pillars
+            What I Do
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {EXPERTISE_CARDS.map((card) => (
@@ -90,32 +90,6 @@ export const AboutSection: React.FC = () => {
                 )}
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Engineering Standards Bar */}
-        <div className="rounded-xl border border-white/10 bg-[#0d1117] p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08] mb-4">
-            <span className="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">
-              Engineering Focus & Standards
-            </span>
-            <span className="font-mono text-xs text-zinc-500">
-              Clean Architecture • Practical AI Systems • Measurable Outcomes
-            </span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs text-zinc-300">
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-              <span>Full CRUD workflows with type-safe schema definitions and robust authentication.</span>
-            </div>
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-              <span>AI integrations (Gemini API, RAG, Decision Trees) tailored for actual business use.</span>
-            </div>
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-white shrink-0 mt-0.5" />
-              <span>Production edge deployments across Vercel & Netlify with automated CI/CD workflows.</span>
-            </div>
           </div>
         </div>
       </div>
