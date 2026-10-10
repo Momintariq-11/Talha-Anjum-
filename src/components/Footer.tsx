@@ -66,12 +66,9 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-500">
+        <div className="pt-6 flex items-center justify-center text-xs font-mono text-zinc-500">
           <div>
             © 2026 {PERSONAL_INFO.name}. All rights reserved.
-          </div>
-          <div>
-            {PERSONAL_INFO.education.university} • {PERSONAL_INFO.education.location}
           </div>
         </div>
       </div>

@@ -128,15 +128,7 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
             Muhammad Talha Anjum
           </h3>
           <p className="text-xs font-mono text-emerald-400 mt-0.5">
-            {isSpeaking
-              ? gesture === 'waving'
-                ? '👋 Saying hello...'
-                : gesture === 'hand-on-chest'
-                ? 'Introducing himself...'
-                : 'Speaking with deep baritone voice...'
-              : isPaused
-              ? 'Introduction paused'
-              : 'AI & Full-Stack Developer'}
+            AI & Full-Stack Developer
           </p>
         </div>
 
