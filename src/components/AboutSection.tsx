@@ -3,7 +3,7 @@ import { Bot, Zap, Wrench, TrendingUp } from 'lucide-react'
 import { EXPERTISE_CARDS, PERSONAL_INFO } from '../data/portfolioData'
 import { ProfileCard } from './ProfileCard'
 import { DeveloperAvatar3D } from './DeveloperAvatar3D'
-import { InstagramIcon, TikTokIcon, FacebookIcon } from './Icons'
+import { InstagramIcon, TikTokIcon } from './Icons'
 
 export const AboutSection: React.FC = () => {
   const getIcon = (iconName: string) => {
@@ -120,47 +120,30 @@ export const AboutSection: React.FC = () => {
                         </span>
                         <span className="text-[10px] text-zinc-400 font-normal">Vertex Studio</span>
                       </div>
-                      {card.socialLinks.map((link) => {
-                        if (link.isPending) {
-                          return (
-                            <div
-                              key={link.name}
-                              className="w-full py-2 px-3 rounded-lg bg-white/[0.03] border border-white/10 text-zinc-400 text-xs font-mono flex items-center justify-between cursor-not-allowed select-none"
-                              title="Facebook page link coming soon"
-                            >
-                              <div className="flex items-center gap-2.5">
-                                <FacebookIcon className="w-4 h-4 text-zinc-500" />
-                                <span>Facebook</span>
-                              </div>
-                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400 font-normal">
-                                Coming Soon
-                              </span>
-                            </div>
-                          )
-                        }
-
-                        return (
-                          <a
-                            key={link.name}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-2 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-400 hover:text-emerald-300 text-xs font-mono font-medium flex items-center justify-between transition-all group/btn shadow-sm"
-                            title={`Visit Vertex Studio ${link.name}`}
-                          >
-                            <div className="flex items-center gap-2.5">
-                              {link.icon === 'instagram' && <InstagramIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />}
-                              {link.icon === 'tiktok' && <TikTokIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />}
-                              {link.icon === 'facebook' && <FacebookIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />}
-                              <span>{link.name}</span>
-                            </div>
-                            <span className="text-[11px] text-emerald-400/80 group-hover/btn:text-emerald-300 flex items-center gap-1">
-                              <span>Open</span>
-                              <span className="transition-transform group-hover/btn:translate-x-0.5">↗</span>
-                            </span>
-                          </a>
-                        )
-                      })}
+                      {card.socialLinks.map((link) => (
+                        <a
+                          key={link.name}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-2 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-400 hover:text-emerald-300 text-xs font-mono font-medium flex items-center justify-between transition-all group/btn shadow-sm"
+                          title={`Visit Vertex Studio ${link.name}`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            {link.icon === 'instagram' && (
+                              <InstagramIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />
+                            )}
+                            {link.icon === 'tiktok' && (
+                              <TikTokIcon className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />
+                            )}
+                            <span>{link.name}</span>
+                          </div>
+                          <span className="text-[11px] text-emerald-400/80 group-hover/btn:text-emerald-300 flex items-center gap-1">
+                            <span>Open</span>
+                            <span className="transition-transform group-hover/btn:translate-x-0.5">↗</span>
+                          </span>
+                        </a>
+                      ))}
                     </div>
                   )}
                 </div>

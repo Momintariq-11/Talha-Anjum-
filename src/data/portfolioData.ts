@@ -118,12 +118,6 @@ export const EXPERTISE_CARDS: ExpertiseCard[] = [
         name: "TikTok",
         url: "https://www.tiktok.com/@vertexstudios2?is_from_webapp=1&sender_device=pc",
         icon: "tiktok"
-      },
-      {
-        name: "Facebook",
-        url: "#",
-        icon: "facebook",
-        isPending: true
       }
     ]
   }
