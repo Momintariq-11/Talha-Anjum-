@@ -59,6 +59,7 @@ export interface ExpertiseSocialLink {
   name: string
   url: string
   icon: 'instagram' | 'tiktok' | 'facebook'
+  isPending?: boolean
 }
 
 export interface ExpertiseCard {
@@ -108,9 +109,22 @@ export const EXPERTISE_CARDS: ExpertiseCard[] = [
     borderGlow: "rgba(232, 121, 249, 0.4)",
     tags: ["Social Media", "Meta Ads", "Content Strategy", "Page Management"],
     socialLinks: [
-      { name: "Instagram", url: "https://www.instagram.com/", icon: "instagram" },
-      { name: "TikTok", url: "https://www.tiktok.com/", icon: "tiktok" },
-      { name: "Facebook", url: "https://www.facebook.com/", icon: "facebook" }
+      {
+        name: "Instagram",
+        url: "https://www.instagram.com/vertexstudiosagency02/",
+        icon: "instagram"
+      },
+      {
+        name: "TikTok",
+        url: "https://www.tiktok.com/@vertexstudios2?is_from_webapp=1&sender_device=pc",
+        icon: "tiktok"
+      },
+      {
+        name: "Facebook",
+        url: "#",
+        icon: "facebook",
+        isPending: true
+      }
     ]
   }
 ]

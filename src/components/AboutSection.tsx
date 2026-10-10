@@ -109,21 +109,36 @@ export const AboutSection: React.FC = () => {
 
                   {card.socialLinks && (
                     <div className="mt-3.5 pt-3 border-t border-white/[0.08] grid grid-cols-3 gap-1.5">
-                      {card.socialLinks.map((link) => (
-                        <a
-                          key={link.name}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="py-1.5 px-2 rounded-lg bg-white/5 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/30 text-zinc-300 hover:text-emerald-400 text-[11px] font-mono font-medium flex items-center justify-center gap-1.5 transition-colors"
-                          title={link.name}
-                        >
-                          {link.icon === 'instagram' && <InstagramIcon className="w-3.5 h-3.5" />}
-                          {link.icon === 'tiktok' && <TikTokIcon className="w-3.5 h-3.5" />}
-                          {link.icon === 'facebook' && <FacebookIcon className="w-3.5 h-3.5" />}
-                          <span className="hidden sm:inline">{link.name}</span>
-                        </a>
-                      ))}
+                      {card.socialLinks.map((link) => {
+                        if (link.isPending) {
+                          return (
+                            <span
+                              key={link.name}
+                              className="py-1.5 px-2 rounded-lg bg-white/[0.03] border border-white/5 text-zinc-600 text-[11px] font-mono font-medium flex items-center justify-center gap-1.5 cursor-not-allowed select-none"
+                              title="Facebook page link coming soon"
+                            >
+                              <FacebookIcon className="w-3.5 h-3.5 opacity-40" />
+                              <span className="hidden sm:inline">Facebook</span>
+                            </span>
+                          )
+                        }
+
+                        return (
+                          <a
+                            key={link.name}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="py-1.5 px-2 rounded-lg bg-white/5 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/30 text-zinc-300 hover:text-emerald-400 text-[11px] font-mono font-medium flex items-center justify-center gap-1.5 transition-colors"
+                            title={`Open Vertex Studios ${link.name}`}
+                          >
+                            {link.icon === 'instagram' && <InstagramIcon className="w-3.5 h-3.5" />}
+                            {link.icon === 'tiktok' && <TikTokIcon className="w-3.5 h-3.5" />}
+                            {link.icon === 'facebook' && <FacebookIcon className="w-3.5 h-3.5" />}
+                            <span className="hidden sm:inline">{link.name}</span>
+                          </a>
+                        )
+                      })}
                     </div>
                   )}
                 </div>
