@@ -46,9 +46,12 @@ export const Footer: React.FC = () => {
             </a>
 
             <a
-              href={PERSONAL_INFO.contact.phoneTel}
-              className="p-2 rounded-lg bg-white/5 border border-white/10 text-zinc-300 hover:text-white transition-colors"
-              aria-label="Phone"
+              href={PERSONAL_INFO.contact.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg bg-white/5 border border-white/10 text-zinc-300 hover:text-emerald-400 transition-colors"
+              aria-label="Chat on WhatsApp"
+              title="Chat on WhatsApp"
             >
               <Phone className="w-4 h-4" />
             </a>

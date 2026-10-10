@@ -106,12 +106,15 @@ export const ContactSection: React.FC = () => {
                       <Phone className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono text-zinc-500 block">Phone / WhatsApp</span>
+                      <span className="text-[10px] font-mono text-zinc-500 block">Phone / WhatsApp (Click to chat)</span>
                       <a
-                        href={PERSONAL_INFO.contact.phoneTel}
-                        className="text-xs sm:text-sm font-medium text-white hover:text-emerald-400 transition-colors"
+                        href={PERSONAL_INFO.contact.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs sm:text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5"
                       >
-                        {PERSONAL_INFO.contact.phone}
+                        <span>{PERSONAL_INFO.contact.phone}</span>
+                        <ExternalLink className="w-3 h-3 text-emerald-500" />
                       </a>
                     </div>
                   </div>
@@ -157,9 +160,9 @@ export const ContactSection: React.FC = () => {
               <div className="mt-5 pt-4 border-t border-white/[0.08] grid grid-cols-3 gap-2">
                 <a
                   href={`mailto:${PERSONAL_INFO.contact.email}`}
-                  className="py-2 text-center rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-bold text-xs transition-colors"
+                  className="py-2 text-center rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition-colors shadow-sm"
                 >
-                  Email
+                  Email ✉️
                 </a>
                 <a
                   href={PERSONAL_INFO.contact.github}
@@ -170,10 +173,12 @@ export const ContactSection: React.FC = () => {
                   GitHub ↗
                 </a>
                 <a
-                  href={PERSONAL_INFO.contact.phoneTel}
-                  className="py-2 text-center rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-xs transition-colors"
+                  href={PERSONAL_INFO.contact.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2 text-center rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-bold text-xs transition-colors"
                 >
-                  Call / WA
+                  WhatsApp 💬
                 </a>
               </div>
             </div>

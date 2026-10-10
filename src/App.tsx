@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Send, ArrowDown, Sparkles } from 'lucide-react'
 import { GithubIcon } from './components/Icons'
 import { Navbar } from './components/Navbar'
@@ -10,17 +9,7 @@ import { ContactSection } from './components/ContactSection'
 import { Footer } from './components/Footer'
 import { PERSONAL_INFO } from './data/portfolioData'
 
-const TECH_FONTS = [
-  { id: 'space', name: 'Tech Modern (Space Grotesk)', className: 'font-tech-space' },
-  { id: 'syne', name: 'Geometric Wide (Syne)', className: 'font-tech-syne' },
-  { id: 'unbounded', name: 'Futuristic AI (Unbounded)', className: 'font-tech-unbounded' },
-  { id: 'outfit', name: 'Clean Minimal (Outfit)', className: 'font-tech-outfit' },
-  { id: 'jakarta', name: 'Silicon Valley (Jakarta)', className: 'font-tech-jakarta' }
-]
-
 export function App() {
-  const [activeFont, setActiveFont] = useState(TECH_FONTS[0]) // Default: Space Grotesk (Tech Modern)
-
   const handleSmoothScroll = (href: string) => {
     const target = document.querySelector(href)
     if (target) {
@@ -38,127 +27,110 @@ export function App() {
         {/* ===================== HERO SECTION ===================== */}
         <section
           id="home"
-          className="relative min-h-[90vh] pt-36 pb-20 flex items-center justify-center border-b border-white/[0.06]"
+          className="relative min-h-[92vh] pt-32 pb-20 flex flex-col items-center justify-center border-b border-white/[0.06]"
         >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
-            <div className="max-w-4xl">
-              {/* Top Row: Availability Status Badge + Quick Font Style Presets */}
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-300 bg-white/5 border border-white/10">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
-                  <span>{PERSONAL_INFO.availability}</span>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full flex flex-col items-center text-center">
+            {/* Availability Status Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-medium text-zinc-300 bg-white/5 border border-white/10 mb-8">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span>{PERSONAL_INFO.availability}</span>
+            </div>
+
+            {/* MUHAMMAD TALHA ANJUM fully from one end to another end in ALL CAPS */}
+            <div className="w-full mb-6 select-none">
+              <h2 className="w-full font-mono font-black text-emerald-400 uppercase tracking-[0.2em] sm:tracking-[0.35em] md:tracking-[0.5em] lg:tracking-[0.65em] text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center">
+                MUHAMMAD TALHA ANJUM
+              </h2>
+            </div>
+
+            {/* FULL STACK (smaller, in one line, centered) */}
+            <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-mono font-bold tracking-[0.3em] sm:tracking-[0.45em] text-zinc-400 uppercase mb-2 select-none">
+              FULL STACK
+            </div>
+
+            {/* DEVELOPER (big, massive, below FULL STACK, centered) */}
+            <h1 className="font-tech-space text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[11.5rem] font-black text-white uppercase tracking-tight leading-[0.85] mb-8 select-none">
+              DEVELOPER
+            </h1>
+
+            {/* Supporting Professional Subtitle */}
+            <p className="text-base sm:text-lg lg:text-xl text-zinc-400 font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+              Architecting production-ready AI systems and scalable web platforms. Leveraging generative models, type-safe full-stack architectures with Next.js & PostgreSQL, and precision digital growth systems to build high-impact digital experiences.
+            </p>
+
+            {/* Three Centered Hero CTA Buttons (Minimal, clean, no neon glow) */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleSmoothScroll('#projects')
+                }}
+                className="px-6 py-3.5 rounded-lg font-bold text-xs tracking-wide bg-emerald-500 hover:bg-emerald-400 text-black transition-colors flex items-center gap-2 shadow-sm"
+              >
+                <Sparkles className="w-4 h-4" />
+                Explore My Work
+              </a>
+
+              <a
+                href={`mailto:${PERSONAL_INFO.contact.email}`}
+                className="px-6 py-3.5 rounded-lg font-semibold text-xs tracking-wide bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-colors flex items-center gap-2"
+              >
+                <Send className="w-3.5 h-3.5 text-emerald-400" />
+                Let's Work Together
+              </a>
+
+              <a
+                href={PERSONAL_INFO.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-lg font-semibold text-xs tracking-wide bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <GithubIcon className="w-3.5 h-3.5" />
+                GitHub ↗
+              </a>
+            </div>
+
+            {/* Minimal Standing Avatar Preview Capsule */}
+            <div className="mb-8 p-3 rounded-2xl bg-[#0d1117] border border-white/10 flex items-center gap-4 max-w-md w-full justify-between">
+              <div className="flex items-center gap-3 text-left">
+                <div className="w-12 h-14 rounded-lg bg-[#08090d] border border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
+                  <img
+                    src="/talha-avatar-idle.jpg"
+                    alt="Standing Avatar preview"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-
-                {/* Instant 1-Click Font Switcher for FULL STACK DEVELOPMENT */}
-                <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/5 border border-white/10">
-                  <span className="text-[10px] font-mono text-zinc-400 pl-2 pr-1">Headline Style:</span>
-                  {TECH_FONTS.map((font) => (
-                    <button
-                      key={font.id}
-                      onClick={() => setActiveFont(font)}
-                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono transition-all ${
-                        activeFont.id === font.id
-                          ? 'bg-emerald-500 text-black font-bold shadow-sm'
-                          : 'text-zinc-400 hover:text-white hover:bg-white/10'
-                      }`}
-                      title={font.name}
-                    >
-                      {font.id.charAt(0).toUpperCase() + font.id.slice(1)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Name in Green (standard clean mono) */}
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono font-bold text-emerald-400 tracking-tight mb-3">
-                Muhammad Talha Anjum
-              </div>
-
-              {/* FULL STACK DEVELOPMENT strictly in the selected modern tech font only */}
-              <h1 className={`${activeFont.className} text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white uppercase leading-[0.92] mb-6 tracking-tight`}>
-                FULL STACK DEVELOPMENT
-              </h1>
-
-              {/* Supporting Subtitle */}
-              <p className="text-base sm:text-lg lg:text-xl text-zinc-400 font-light leading-relaxed mb-8 max-w-2xl">
-                Building practical software, intelligent AI applications with Gemini API & Python, modern full-stack web platforms using Next.js & PostgreSQL, and high-converting Meta Ads growth systems.
-              </p>
-
-              {/* Interactive 3D Avatar Hero Teaser Card */}
-              <div className="p-4 rounded-2xl bg-[#0d1117]/90 border border-emerald-500/30 backdrop-blur-md mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
-                <div className="flex items-center gap-3.5">
-                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-400 shadow-[0_0_12px_#10b98140] shrink-0 bg-[#08090d]">
-                    <img
-                      src="/talha-avatar-face.jpg"
-                      alt="Muhammad Talha Anjum 3D Avatar"
-                      className="w-full h-full object-cover"
-                    />
-                    <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0d1117] animate-pulse" />
+                <div>
+                  <div className="text-xs font-bold text-white flex items-center gap-2">
+                    <span>Talha's Standing 3D Avatar</span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20">
+                      Waving & Speaking
+                    </span>
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-white tracking-tight">Talha's 3D Interactive Avatar</span>
-                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-semibold">
-                        Deep Voice Core
-                      </span>
-                    </div>
-                    <p className="text-xs text-zinc-400 font-mono mt-0.5">
-                      Modeled from reference photo (white cap, glasses, beard) with heavy baritone voice intro.
-                    </p>
-                  </div>
+                  <p className="text-[11px] font-mono text-zinc-400 mt-0.5">
+                    Snapchat-style standing avatar with speech gestures
+                  </p>
                 </div>
-
-                <button
-                  onClick={() => handleSmoothScroll('#about')}
-                  className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-mono font-bold shadow-md shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 shrink-0"
-                >
-                  <span>Interact with Avatar ↓</span>
-                </button>
               </div>
 
-              {/* Three Prominent Hero CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-3 mb-10">
-                <a
-                  href="#projects"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleSmoothScroll('#projects')
-                  }}
-                  className="px-6 py-3.5 rounded-lg font-bold text-xs tracking-wide bg-emerald-500 hover:bg-emerald-400 text-black transition-colors shadow-lg shadow-emerald-500/20 flex items-center gap-2"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  Explore My Work
-                </a>
+              <button
+                onClick={() => handleSmoothScroll('#about')}
+                className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-mono font-bold transition-colors shrink-0"
+              >
+                Meet Avatar ↓
+              </button>
+            </div>
 
-                <a
-                  href={`mailto:${PERSONAL_INFO.contact.email}`}
-                  className="px-6 py-3.5 rounded-lg font-semibold text-xs tracking-wide bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-colors flex items-center gap-2"
-                >
-                  <Send className="w-3.5 h-3.5 text-emerald-400" />
-                  Let's Work Together
-                </a>
-
-                <a
-                  href={PERSONAL_INFO.contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-3.5 rounded-lg font-semibold text-xs tracking-wide bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <GithubIcon className="w-3.5 h-3.5" />
-                  GitHub ↗
-                </a>
-              </div>
-
-              {/* Scroll Down Invitation to Meet Avatar & Data */}
-              <div className="pt-4 border-t border-white/[0.08] flex items-center gap-3 text-xs font-mono text-zinc-500">
-                <button
-                  onClick={() => handleSmoothScroll('#about')}
-                  className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 transition-colors"
-                >
-                  <ArrowDown className="w-4 h-4 text-emerald-400 animate-bounce" />
-                  <span>Scroll down for verified credentials & interactive voice avatar</span>
-                </button>
-              </div>
+            {/* Scroll Down Invitation */}
+            <div className="pt-4 border-t border-white/[0.08] w-full max-w-md mx-auto flex items-center justify-center gap-3 text-xs font-mono text-zinc-500">
+              <button
+                onClick={() => handleSmoothScroll('#about')}
+                className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 transition-colors"
+              >
+                <ArrowDown className="w-4 h-4 text-emerald-400 animate-bounce" />
+                <span>Scroll down to meet Talha's avatar & verified data</span>
+              </button>
             </div>
           </div>
         </section>

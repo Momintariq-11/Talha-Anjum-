@@ -36,7 +36,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ className = '' }) => {
       {/* Top Header Controls: Toggle Image vs Monogram */}
       <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400" />
           <span className="text-xs font-mono font-semibold uppercase tracking-wider text-white">
             Developer Credentials
           </span>
@@ -179,6 +179,24 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ className = '' }) => {
           <span className="font-medium text-zinc-300">
             {PERSONAL_INFO.education.location}
           </span>
+        </div>
+
+        {/* Quick Communication Actions: WhatsApp & Email */}
+        <div className="pt-3 border-t border-white/[0.08] grid grid-cols-2 gap-2">
+          <a
+            href={PERSONAL_INFO.contact.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-2 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+          >
+            <span>WhatsApp 💬</span>
+          </a>
+          <a
+            href={`mailto:${PERSONAL_INFO.contact.email}`}
+            className="py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-xs flex items-center justify-center gap-1.5 transition-colors"
+          >
+            <span>Email ✉️</span>
+          </a>
         </div>
       </div>
     </div>
