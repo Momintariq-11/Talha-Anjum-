@@ -55,7 +55,25 @@ export const PERSONAL_INFO = {
   }
 }
 
-export const EXPERTISE_CARDS = [
+export interface ExpertiseSocialLink {
+  name: string
+  url: string
+  icon: 'instagram' | 'tiktok' | 'facebook'
+}
+
+export interface ExpertiseCard {
+  icon: string
+  title: string
+  role?: string
+  description: string
+  highlight: string
+  gradient: string
+  borderGlow: string
+  tags?: string[]
+  socialLinks?: ExpertiseSocialLink[]
+}
+
+export const EXPERTISE_CARDS: ExpertiseCard[] = [
   {
     icon: "Bot",
     title: "AI Development",
@@ -82,12 +100,18 @@ export const EXPERTISE_CARDS = [
   },
   {
     icon: "TrendingUp",
-    title: "Social Media Marketing",
-    description: "Social media strategy, content planning, page handling, audience engagement, Meta Ads setup and performance-focused marketing for businesses.",
+    title: "Vertex Studio Agency",
+    role: "CEO & Founder",
+    description: "CEO and Founder of Vertex Studio Agency. Delivering performance-driven Meta Ads, organic content strategy, page management, and scaling social channels for brands.",
     highlight: "Meta Ads • Content • Page Mgmt",
     gradient: "from-fuchsia-500/20 via-pink-500/10 to-transparent",
     borderGlow: "rgba(232, 121, 249, 0.4)",
-    tags: ["Social Media", "Meta Ads", "Content Strategy", "Page Management"]
+    tags: ["Social Media", "Meta Ads", "Content Strategy", "Page Management"],
+    socialLinks: [
+      { name: "Instagram", url: "https://www.instagram.com/", icon: "instagram" },
+      { name: "TikTok", url: "https://www.tiktok.com/", icon: "tiktok" },
+      { name: "Facebook", url: "https://www.facebook.com/", icon: "facebook" }
+    ]
   }
 ]
 

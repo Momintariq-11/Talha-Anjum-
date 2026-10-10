@@ -3,6 +3,7 @@ import { Bot, Zap, Wrench, TrendingUp } from 'lucide-react'
 import { EXPERTISE_CARDS, PERSONAL_INFO } from '../data/portfolioData'
 import { ProfileCard } from './ProfileCard'
 import { DeveloperAvatar3D } from './DeveloperAvatar3D'
+import { InstagramIcon, TikTokIcon, FacebookIcon } from './Icons'
 
 export const AboutSection: React.FC = () => {
   const getIcon = (iconName: string) => {
@@ -54,9 +55,18 @@ export const AboutSection: React.FC = () => {
 
         {/* 4 Pillars Expertise Grid */}
         <div>
-          <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold mb-4">
-            What I Do
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-medium text-emerald-400 bg-white/5 border border-white/10 uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              What I Do
+            </div>
+            <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
+              <span className="text-emerald-400 font-semibold">Vertex Studio Agency</span>
+              <span className="text-zinc-600">•</span>
+              <span>CEO & Founder</span>
+            </div>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {EXPERTISE_CARDS.map((card) => (
               <div
@@ -64,8 +74,15 @@ export const AboutSection: React.FC = () => {
                 className="rounded-xl p-6 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-emerald-500/40 transition-colors">
-                    {getIcon(card.icon)}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-500/40 transition-colors">
+                      {getIcon(card.icon)}
+                    </div>
+                    {card.role && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-semibold">
+                        {card.role}
+                      </span>
+                    )}
                   </div>
 
                   <h3 className="text-base font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
@@ -76,18 +93,40 @@ export const AboutSection: React.FC = () => {
                   </p>
                 </div>
 
-                {card.tags && (
-                  <div className="flex flex-wrap gap-1.5 mt-5 pt-4 border-t border-white/[0.08]">
-                    {card.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                <div>
+                  {card.tags && (
+                    <div className="flex flex-wrap gap-1.5 mt-5 pt-4 border-t border-white/[0.08]">
+                      {card.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {card.socialLinks && (
+                    <div className="mt-3.5 pt-3 border-t border-white/[0.08] grid grid-cols-3 gap-1.5">
+                      {card.socialLinks.map((link) => (
+                        <a
+                          key={link.name}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-1.5 px-2 rounded-lg bg-white/5 hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/30 text-zinc-300 hover:text-emerald-400 text-[11px] font-mono font-medium flex items-center justify-center gap-1.5 transition-colors"
+                          title={link.name}
+                        >
+                          {link.icon === 'instagram' && <InstagramIcon className="w-3.5 h-3.5" />}
+                          {link.icon === 'tiktok' && <TikTokIcon className="w-3.5 h-3.5" />}
+                          {link.icon === 'facebook' && <FacebookIcon className="w-3.5 h-3.5" />}
+                          <span className="hidden sm:inline">{link.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
