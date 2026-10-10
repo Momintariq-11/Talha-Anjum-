@@ -57,6 +57,12 @@
   }
 }
 
+/* Modern Gotham / Geometric Typography for Solvix Agency */
+.font-gotham {
+  font-family: 'Gotham', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.02em;
+}
+
 /* Modern High-Tech Developer Typography strictly for FULL STACK DEVELOPMENT */
 .font-tech-space {
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;

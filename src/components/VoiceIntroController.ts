@@ -102,6 +102,14 @@ export class VoiceIntroManager {
     return voices[0]
   }
 
+  public toggle() {
+    if (this.isSpeaking) {
+      this.pause()
+    } else {
+      this.play()
+    }
+  }
+
   public play() {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
 

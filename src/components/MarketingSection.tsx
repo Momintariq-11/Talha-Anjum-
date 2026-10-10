@@ -2,21 +2,22 @@ import React, { useState } from 'react'
 import { Target, Smartphone, BarChart3, CheckCircle } from 'lucide-react'
 import { MARKETING_PILLARS } from '../data/portfolioData'
 
-export const MarketingSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'pipeline' | 'ads' | 'cadence'>('pipeline')
+import type { MarketingPillar } from '../data/portfolioData'
 
-  const getPillarIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Target':
-        return <Target className="w-5 h-5 text-emerald-400" />
-      case 'Smartphone':
-        return <Smartphone className="w-5 h-5 text-emerald-400" />
-      case 'BarChart3':
-        return <BarChart3 className="w-5 h-5 text-emerald-400" />
-      default:
-        return <BarChart3 className="w-5 h-5 text-emerald-400" />
-    }
-  }
+const PILLAR_ICONS: Record<string, React.ReactNode> = {
+  Target: <Target className="w-5 h-5 text-emerald-400" />,
+  Smartphone: <Smartphone className="w-5 h-5 text-emerald-400" />,
+  BarChart3: <BarChart3 className="w-5 h-5 text-emerald-400" />
+}
+
+interface MarketingSectionProps {
+  pillars?: MarketingPillar[]
+}
+
+export const MarketingSection: React.FC<MarketingSectionProps> = ({
+  pillars = MARKETING_PILLARS
+}) => {
+  const [activeTab, setActiveTab] = useState<'pipeline' | 'ads' | 'cadence'>('pipeline')
 
   return (
     <section id="marketing" className="py-24 border-t border-white/[0.08] relative">
@@ -39,14 +40,14 @@ export const MarketingSection: React.FC = () => {
 
         {/* 3 Core Pillars Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {MARKETING_PILLARS.map((pillar) => (
+          {pillars.map((pillar) => (
             <div
               key={pillar.title}
               className="rounded-xl p-6 bg-[#0d1117] border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between group"
             >
               <div>
                 <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-emerald-500/40 transition-colors">
-                  {getPillarIcon(pillar.icon)}
+                  {PILLAR_ICONS[pillar.icon] || PILLAR_ICONS.BarChart3}
                 </div>
 
                 <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">

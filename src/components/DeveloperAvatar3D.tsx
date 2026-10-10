@@ -38,31 +38,18 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
     }
   }, [])
 
-  const handleTogglePlay = () => {
-    if (isSpeaking) {
-      voiceIntroManager.pause()
-    } else {
-      voiceIntroManager.play()
-    }
-  }
+  // Direct single-call controls (clean, zero redundant functions)
+  const handleTogglePlay = () => voiceIntroManager.toggle()
+  const handleToggleMute = () => setIsMuted(voiceIntroManager.toggleMute())
 
-  const handleToggleMute = () => {
-    const muted = voiceIntroManager.toggleMute()
-    setIsMuted(muted)
-  }
-
-  // Active avatar gesture mapping:
-  // 1. "Hello" -> Waving hand
-  // 2. "I am Muhammad Talha Anjum" -> Hand on chest
-  // 3. Remainder of speech & Idle -> Statue posture (hands clasped in front, stationary & dignified)
-  const getAvatarImageSrc = () => {
-    if (isSpeaking) {
-      if (gesture === 'waving') return '/talha-avatar-waving.jpg'
-      if (gesture === 'hand-on-chest') return '/talha-avatar-hand-on-chest.jpg'
-      return '/talha-avatar-idle.jpg'
-    }
-    return '/talha-avatar-idle.jpg'
-  }
+  // Direct active avatar image mapping
+  const currentAvatarSrc = !isSpeaking
+    ? '/talha-avatar-idle.jpg'
+    : gesture === 'waving'
+    ? '/talha-avatar-waving.jpg'
+    : gesture === 'hand-on-chest'
+    ? '/talha-avatar-hand-on-chest.jpg'
+    : '/talha-avatar-idle.jpg'
 
   return (
     <div className={`relative w-full flex flex-col items-center select-none ${className}`}>
@@ -100,8 +87,8 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
         <div className="relative w-full flex flex-col items-center justify-center my-2 min-h-[440px]">
           <div className="relative w-full max-w-[280px] h-[440px] flex items-center justify-center">
             <img
-              key={getAvatarImageSrc()}
-              src={getAvatarImageSrc()}
+              key={currentAvatarSrc}
+              src={currentAvatarSrc}
               alt="Muhammad Talha Anjum Standing 3D Avatar"
               className="w-full h-full object-contain select-none pointer-events-none transition-opacity duration-200"
               onError={(e) => {

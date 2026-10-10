@@ -5,21 +5,24 @@ import { ProfileCard } from './ProfileCard'
 import { DeveloperAvatar3D } from './DeveloperAvatar3D'
 import { InstagramIcon, TikTokIcon } from './Icons'
 
-export const AboutSection: React.FC = () => {
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Bot':
-        return <Bot className="w-5 h-5 text-emerald-400" />
-      case 'Zap':
-        return <Zap className="w-5 h-5 text-emerald-400" />
-      case 'Wrench':
-        return <Wrench className="w-5 h-5 text-emerald-400" />
-      case 'TrendingUp':
-        return <TrendingUp className="w-5 h-5 text-emerald-400" />
-      default:
-        return <Zap className="w-5 h-5 text-emerald-400" />
-    }
-  }
+import type { ExpertiseCard } from '../data/portfolioData'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  Bot: <Bot className="w-5 h-5 text-emerald-400" />,
+  Zap: <Zap className="w-5 h-5 text-emerald-400" />,
+  Wrench: <Wrench className="w-5 h-5 text-emerald-400" />,
+  TrendingUp: <TrendingUp className="w-5 h-5 text-emerald-400" />
+}
+
+interface AboutSectionProps {
+  cards?: ExpertiseCard[]
+  brandMode?: 'personal' | 'solvix'
+}
+
+export const AboutSection: React.FC<AboutSectionProps> = ({
+  cards = EXPERTISE_CARDS,
+  brandMode = 'personal'
+}) => {
 
   return (
     <section id="about" className="py-24 border-t border-white/[0.08] relative">
@@ -61,14 +64,16 @@ export const AboutSection: React.FC = () => {
               What I Do
             </div>
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
-              <span className="text-emerald-400 font-semibold">Vertex Studio Agency</span>
+              <span className="text-emerald-400 font-semibold">
+                {brandMode === 'solvix' ? 'Solvix Agency' : 'Vertex Studio Agency'}
+              </span>
               <span className="text-zinc-600">•</span>
-              <span>CEO & Founder</span>
+              <span>{brandMode === 'solvix' ? 'Digital Innovation' : 'CEO & Founder'}</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {EXPERTISE_CARDS.map((card) => (
+            {cards.map((card) => (
               <div
                 key={card.title}
                 className={`rounded-xl p-6 bg-[#0d1117] transition-all flex flex-col justify-between group ${
@@ -80,7 +85,7 @@ export const AboutSection: React.FC = () => {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-500/40 transition-colors">
-                      {getIcon(card.icon)}
+                      {ICON_MAP[card.icon] || ICON_MAP.Zap}
                     </div>
                     {card.role && (
                       <span className="px-2 py-0.5 rounded text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-semibold">

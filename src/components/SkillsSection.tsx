@@ -2,29 +2,26 @@ import React, { useState } from 'react'
 import { Terminal, Code2, Cpu, Database, Brain, GitBranch, Megaphone, CheckCircle } from 'lucide-react'
 import { TECHNICAL_SKILLS } from '../data/portfolioData'
 
-export const SkillsSection: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('all')
+import type { SkillCategory } from '../data/portfolioData'
 
-  const getSkillIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Terminal':
-        return <Terminal className="w-5 h-5 text-emerald-400" />
-      case 'Code2':
-        return <Code2 className="w-5 h-5 text-emerald-400" />
-      case 'Cpu':
-        return <Cpu className="w-5 h-5 text-emerald-400" />
-      case 'Database':
-        return <Database className="w-5 h-5 text-emerald-400" />
-      case 'Brain':
-        return <Brain className="w-5 h-5 text-emerald-400" />
-      case 'GitBranch':
-        return <GitBranch className="w-5 h-5 text-emerald-400" />
-      case 'Megaphone':
-        return <Megaphone className="w-5 h-5 text-emerald-400" />
-      default:
-        return <Code2 className="w-5 h-5 text-emerald-400" />
-    }
-  }
+const SKILL_ICONS: Record<string, React.ReactNode> = {
+  Terminal: <Terminal className="w-5 h-5 text-emerald-400" />,
+  Code2: <Code2 className="w-5 h-5 text-emerald-400" />,
+  Cpu: <Cpu className="w-5 h-5 text-emerald-400" />,
+  Database: <Database className="w-5 h-5 text-emerald-400" />,
+  Brain: <Brain className="w-5 h-5 text-emerald-400" />,
+  GitBranch: <GitBranch className="w-5 h-5 text-emerald-400" />,
+  Megaphone: <Megaphone className="w-5 h-5 text-emerald-400" />
+}
+
+interface SkillsSectionProps {
+  skillsList?: SkillCategory[]
+}
+
+export const SkillsSection: React.FC<SkillsSectionProps> = ({
+  skillsList = TECHNICAL_SKILLS
+}) => {
+  const [activeCategory, setActiveCategory] = useState<string>('all')
 
   const categories = [
     { id: 'all', label: 'All Technologies' },
@@ -33,7 +30,7 @@ export const SkillsSection: React.FC = () => {
     { id: 'Data & Growth', label: 'Data & Marketing' }
   ]
 
-  const filteredSkills = TECHNICAL_SKILLS.filter((item) => {
+  const filteredSkills = skillsList.filter((item) => {
     if (activeCategory === 'all') return true
     if (activeCategory === 'AI & ML') {
       return item.title === 'Python' || item.title === 'AI / ML'
@@ -103,7 +100,7 @@ export const SkillsSection: React.FC = () => {
                   <div className={`flex items-center gap-3 mb-3 ${isFullWidth ? 'sm:justify-between' : ''}`}>
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-500/40 transition-colors">
-                        {getSkillIcon(skill.icon)}
+                        {SKILL_ICONS[skill.icon] || SKILL_ICONS.Code2}
                       </div>
                       <div>
                         <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">

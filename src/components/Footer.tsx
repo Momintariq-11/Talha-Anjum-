@@ -3,7 +3,11 @@ import { ArrowUp, Mail, Phone } from 'lucide-react'
 import { PERSONAL_INFO } from '../data/portfolioData'
 import { GithubIcon } from './Icons'
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  brandMode?: 'personal' | 'solvix'
+}
+
+export const Footer: React.FC<FooterProps> = ({ brandMode = 'personal' }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -13,20 +17,37 @@ export const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/[0.08]">
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white mt-0.5">
-              TA
-            </div>
-            <div>
-              <div className="font-bold text-sm text-white">
-                Muhammad Talha Anjum
+            {brandMode === 'solvix' ? (
+              <div>
+                <div className="font-gotham font-black text-xl text-white flex items-center">
+                  <span>Solvi</span>
+                  <span className="text-emerald-400">x</span>
+                </div>
+                <div className="text-xs font-gotham text-zinc-400 font-medium mt-0.5">
+                  Your Vision, Our Digital Expertise
+                </div>
+                <div className="text-xs font-mono text-emerald-400 font-semibold mt-1">
+                  Founded by Muhammad Talha Anjum • Lead Architect
+                </div>
               </div>
-              <div className="text-xs font-mono text-emerald-400 font-semibold mt-0.5">
-                CEO & Founder of Studio Vertex Agency
-              </div>
-              <div className="text-xs font-mono text-zinc-400 mt-0.5">
-                AI & Full Stack Developer | Social Media Marketing
-              </div>
-            </div>
+            ) : (
+              <>
+                <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white mt-0.5">
+                  TA
+                </div>
+                <div>
+                  <div className="font-bold text-sm text-white">
+                    Muhammad Talha Anjum
+                  </div>
+                  <div className="text-xs font-mono text-emerald-400 font-semibold mt-0.5">
+                    CEO & Founder of Studio Vertex Agency
+                  </div>
+                  <div className="text-xs font-mono text-zinc-400 mt-0.5">
+                    AI & Full Stack Developer | Social Media Marketing
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="flex items-center gap-3">
