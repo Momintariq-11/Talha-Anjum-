@@ -14,6 +14,7 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
   const [isMuted, setIsMuted] = useState(false)
   const [transcript, setTranscript] = useState<string>('')
   const [transform3D, setTransform3D] = useState<string>('')
+  const [avatarMode, setAvatarMode] = useState<'3d' | 'photo'>('3d')
 
   useEffect(() => {
     voiceIntroManager.setListener((state) => {
@@ -248,32 +249,63 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
           </span>
         </div>
 
-        {/* ================= FOCUSED FACE-ONLY AVATAR CIRCLE ================= */}
+        {/* Mode Selector Toggle: 3D Avatar vs Reference Photo */}
+        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-white/5 border border-white/10 mb-4">
+          <button
+            onClick={() => setAvatarMode('3d')}
+            className={`px-3 py-1 rounded-md text-[11px] font-mono font-bold transition-all ${
+              avatarMode === '3d'
+                ? 'bg-emerald-500 text-black shadow-sm'
+                : 'text-zinc-400 hover:text-white'
+            }`}
+          >
+            3D Avatar
+          </button>
+          <button
+            onClick={() => setAvatarMode('photo')}
+            className={`px-3 py-1 rounded-md text-[11px] font-mono font-medium transition-all ${
+              avatarMode === 'photo'
+                ? 'bg-white/15 text-white shadow-sm'
+                : 'text-zinc-400 hover:text-white'
+            }`}
+          >
+            Reference Photo
+          </button>
+        </div>
+
+        {/* ================= TRUE 3D STYLIZED AVATAR BUST ================= */}
         <div className="relative my-2">
-          {/* Outer Pulsing Glow Ring */}
+          {/* Outer Pulsing Emerald Halo */}
           <div
-            className={`absolute -inset-2.5 rounded-full transition-all duration-300 ${
+            className={`absolute -inset-3 rounded-full transition-all duration-300 ${
               isSpeaking
-                ? 'bg-emerald-500/20 blur-md animate-pulse'
-                : 'bg-transparent'
+                ? 'bg-emerald-500/25 blur-lg animate-pulse'
+                : 'bg-emerald-500/10 blur-sm'
             }`}
           />
 
-          {/* Precision Circular Face Aperture */}
-          <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2 border-emerald-400/80 shadow-2xl bg-[#08090d] flex items-center justify-center">
+          {/* Precision 3D Circular Face Aperture */}
+          <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-emerald-400 shadow-2xl bg-[#08090d] flex items-center justify-center group">
             <img
-              src="/talha-face.jpg"
-              alt="Muhammad Talha Anjum Face Avatar"
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              src={avatarMode === '3d' ? '/talha-avatar-face.jpg' : '/talha-face.jpg'}
+              alt="Muhammad Talha Anjum 3D Avatar"
+              className={`w-full h-full object-cover transition-all duration-300 ${
+                isSpeaking ? 'scale-105 filter brightness-110' : 'hover:scale-105'
+              }`}
               onError={(e) => {
-                e.currentTarget.src = '/talha.jpg'
+                e.currentTarget.src = '/talha-avatar.jpg'
               }}
             />
 
-            {/* Speaking Scanline Glow */}
+            {/* Speaking Scanline Glow & Audio Pulse */}
             {isSpeaking && (
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/15 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 via-transparent to-emerald-400/10 pointer-events-none" />
             )}
+
+            {/* Subtle Stylized Badge Indicator */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-emerald-500/30 text-[9px] font-mono text-emerald-300 whitespace-nowrap">
+              {avatarMode === '3d' ? '3D Model • Cap & Beard' : 'Reference Image'}
+            </div>
           </div>
 
           {/* Verified Badge */}
@@ -282,13 +314,29 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
           </div>
         </div>
 
+        {/* Dynamic Audio Equalizer Waveform Bars */}
+        <div className="flex items-center justify-center gap-1 my-3 h-5">
+          {[40, 75, 100, 60, 90, 45, 80, 95, 55, 85, 65, 40].map((height, idx) => (
+            <span
+              key={idx}
+              className={`w-1 rounded-full bg-emerald-400 transition-all duration-150 ${
+                isSpeaking ? 'animate-pulse' : 'opacity-30'
+              }`}
+              style={{
+                height: isSpeaking ? `${Math.max(6, (height * (idx % 2 === 0 ? 1 : 0.7)))}%` : '4px',
+                animationDelay: `${idx * 60}ms`
+              }}
+            />
+          ))}
+        </div>
+
         {/* Identity Title */}
-        <div className="text-center mt-3 mb-4">
+        <div className="text-center mb-4">
           <h3 className="text-lg font-bold text-white tracking-tight">
             Muhammad Talha Anjum
           </h3>
           <p className="text-xs font-mono text-emerald-400 mt-0.5">
-            Heavy-Voice Interactive AI Avatar
+            Heavy-Voice 3D Interactive Avatar
           </p>
         </div>
 

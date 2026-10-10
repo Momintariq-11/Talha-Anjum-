@@ -1,4 +1,5 @@
-import { Send, ArrowDown, Sparkles } from 'lucide-react'
+import { useState } from 'react'
+import { Send, ArrowDown, Sparkles, Wand2 } from 'lucide-react'
 import { GithubIcon } from './components/Icons'
 import { Navbar } from './components/Navbar'
 import { AboutSection } from './components/AboutSection'
@@ -9,7 +10,19 @@ import { ContactSection } from './components/ContactSection'
 import { Footer } from './components/Footer'
 import { PERSONAL_INFO } from './data/portfolioData'
 
+const FONT_OPTIONS = [
+  { id: 'syne', label: 'Syne (Editorial Ultra)', family: "'Syne', sans-serif" },
+  { id: 'space', label: 'Space Grotesk (Tech Modern)', family: "'Space Grotesk', sans-serif" },
+  { id: 'cinzel', label: 'Cinzel (High Fashion Serif)', family: "'Cinzel', serif" },
+  { id: 'bricolage', label: 'Bricolage (Contemporary)', family: "'Bricolage Grotesque', sans-serif" },
+  { id: 'playfair', label: 'Playfair (Luxury Serif)', family: "'Playfair Display', serif" },
+  { id: 'outfit', label: 'Outfit (Geometric Bold)', family: "'Outfit', sans-serif" },
+]
+
 export function App() {
+  const [selectedFont, setSelectedFont] = useState(FONT_OPTIONS[0])
+  const [showFontPicker, setShowFontPicker] = useState(false)
+
   const handleSmoothScroll = (href: string) => {
     const target = document.querySelector(href)
     if (target) {
@@ -31,20 +44,57 @@ export function App() {
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
             <div className="max-w-4xl">
-              {/* Availability Status Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-300 bg-white/5 border border-white/10 mb-6">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
-                <span>{PERSONAL_INFO.availability}</span>
+              {/* Top Row: Availability Badge + Optional Font Style Switcher */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium text-zinc-300 bg-white/5 border border-white/10">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
+                  <span>{PERSONAL_INFO.availability}</span>
+                </div>
+
+                {/* Font Style Quick-Selector for testing custom styles */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setShowFontPicker(!showFontPicker)}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-400 hover:text-emerald-300 transition-colors"
+                    title="Change typography font style"
+                  >
+                    <Wand2 className="w-3 h-3 text-emerald-400" />
+                    <span>Font: {selectedFont.label.split(' ')[0]}</span>
+                  </button>
+                </div>
               </div>
+
+              {/* Collapsible Font Style Picker Tray */}
+              {showFontPicker && (
+                <div className="mb-6 p-3 rounded-xl bg-[#0d1117] border border-emerald-500/30 flex flex-wrap items-center gap-2 animate-in fade-in duration-200">
+                  <span className="text-[11px] font-mono text-emerald-400 font-bold mr-1">Choose Font Style:</span>
+                  {FONT_OPTIONS.map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setSelectedFont(f)}
+                      className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-all ${
+                        selectedFont.id === f.id
+                          ? 'bg-emerald-500 text-black font-bold shadow-sm'
+                          : 'bg-white/5 text-zinc-300 hover:text-white border border-white/10'
+                      }`}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Name in Green */}
               <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono font-bold text-emerald-400 tracking-tight mb-3">
                 Muhammad Talha Anjum
               </div>
 
-              {/* Full Stack Developer in White, Big */}
-              <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-white tracking-tight uppercase leading-[0.92] mb-6">
-                Full Stack Developer
+              {/* Full Stack Development in White, Big with Stylish Font */}
+              <h1
+                style={{ fontFamily: selectedFont.family }}
+                className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-white tracking-tight uppercase leading-[0.92] mb-6"
+              >
+                Full Stack Development
               </h1>
 
               {/* Supporting Subtitle */}
@@ -52,8 +102,40 @@ export function App() {
                 Building practical software, intelligent AI applications with Gemini API & Python, modern full-stack web platforms using Next.js & PostgreSQL, and high-converting Meta Ads growth systems.
               </p>
 
+              {/* Interactive 3D Avatar Hero Teaser Card */}
+              <div className="p-4 rounded-2xl bg-[#0d1117]/90 border border-emerald-500/30 backdrop-blur-md mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+                <div className="flex items-center gap-3.5">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-400 shadow-[0_0_12px_#10b98140] shrink-0 bg-[#08090d]">
+                    <img
+                      src="/talha-avatar-face.jpg"
+                      alt="Muhammad Talha Anjum 3D Avatar"
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0d1117] animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-white tracking-tight">Talha's 3D Interactive Avatar</span>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-semibold">
+                        Deep Voice Core
+                      </span>
+                    </div>
+                    <p className="text-xs text-zinc-400 font-mono mt-0.5">
+                      Modeled from reference photo (white cap, glasses, beard) with heavy baritone voice intro.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => handleSmoothScroll('#about')}
+                  className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-mono font-bold shadow-md shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 shrink-0"
+                >
+                  <span>Interact with Avatar ↓</span>
+                </button>
+              </div>
+
               {/* Three Prominent Hero CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-3 mb-12">
+              <div className="flex flex-wrap items-center gap-3 mb-10">
                 <a
                   href="#projects"
                   onClick={(e) => {

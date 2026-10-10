@@ -45,6 +45,36 @@
   }
 }
 
+/* Stylish Typography Classes for Editorial First Look */
+.font-syne {
+  font-family: 'Syne', -apple-system, sans-serif;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-bricolage {
+  font-family: 'Bricolage Grotesque', -apple-system, sans-serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', -apple-system, sans-serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-stylish-display {
+  font-family: var(--custom-heading-font, 'Syne', 'Space Grotesk', -apple-system, sans-serif);
+  letter-spacing: -0.03em;
+}
+
 /* Accessibility: Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
