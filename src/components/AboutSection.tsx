@@ -16,14 +16,11 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 
 interface AboutSectionProps {
   cards?: ExpertiseCard[]
-  brandMode?: 'personal' | 'solvix'
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({
-  cards = EXPERTISE_CARDS,
-  brandMode = 'personal'
+  cards = EXPERTISE_CARDS
 }) => {
-
   return (
     <section id="about" className="py-24 border-t border-white/[0.08] relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -65,10 +62,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </div>
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
               <span className="text-emerald-400 font-semibold">
-                {brandMode === 'solvix' ? 'Solviqx Agency' : 'Vertex Studios Agency'}
+                Vertex Studios Agency
               </span>
               <span className="text-zinc-600">•</span>
-              <span>{brandMode === 'solvix' ? 'Digital Innovation' : 'CEO & Founder'}</span>
+              <span>CEO & Founder</span>
             </div>
           </div>
 

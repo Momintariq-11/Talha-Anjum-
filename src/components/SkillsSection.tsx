@@ -15,11 +15,13 @@ const SKILL_ICONS: Record<string, React.ReactNode> = {
 }
 
 interface SkillsSectionProps {
+  skills?: SkillCategory[]
   skillsList?: SkillCategory[]
 }
 
 export const SkillsSection: React.FC<SkillsSectionProps> = ({
-  skillsList = TECHNICAL_SKILLS
+  skills,
+  skillsList = skills || TECHNICAL_SKILLS
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all')
 

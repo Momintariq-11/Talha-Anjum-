@@ -3,15 +3,7 @@ import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { PERSONAL_INFO } from '../data/portfolioData'
 import { GithubIcon } from './Icons'
 
-interface NavbarProps {
-  brandMode?: 'personal' | 'solvix'
-  onBrandModeChange?: (mode: 'personal' | 'solvix') => void
-}
-
-export const Navbar: React.FC<NavbarProps> = ({
-  brandMode = 'personal',
-  onBrandModeChange
-}) => {
+export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -41,10 +33,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, [])
 
   const navLinks = [
-    { label: brandMode === 'solvix' ? 'Services' : 'About', href: '#about', id: 'about' },
-    { label: brandMode === 'solvix' ? 'Toolkit' : 'Skills', href: '#skills', id: 'skills' },
+    { label: 'About', href: '#about', id: 'about' },
+    { label: 'Skills', href: '#skills', id: 'skills' },
     { label: 'Marketing', href: '#marketing', id: 'marketing' },
-    { label: brandMode === 'solvix' ? 'Case Studies' : 'Projects', href: '#projects', id: 'projects' },
+    { label: 'Projects', href: '#projects', id: 'projects' },
     { label: 'Contact', href: '#contact', id: 'contact' }
   ]
 
@@ -71,31 +63,17 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => handleLinkClick('#home')}
           className="group flex items-center gap-3 select-none"
         >
-          {brandMode === 'solvix' ? (
-            <div className="flex flex-col">
-              <div className="font-gotham font-black text-2xl tracking-tight text-white group-hover:text-emerald-300 transition-colors flex items-center">
-                <span>Solviq</span>
-                <span className="text-emerald-400">x</span>
-              </div>
-              <span className="font-gotham text-[10px] tracking-wide text-zinc-400 font-medium -mt-1">
-                Your Vision, Our Digital Expertise
-              </span>
-            </div>
-          ) : (
-            <>
-              <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white group-hover:border-emerald-500 transition-colors">
-                TA
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition-colors">
-                  Muhammad Talha Anjum
-                </span>
-                <span className="text-[10px] font-mono text-zinc-400">
-                  AI & Full-Stack Developer
-                </span>
-              </div>
-            </>
-          )}
+          <div className="w-8 h-8 rounded-lg bg-[#0d1117] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white group-hover:border-emerald-500 transition-colors">
+            TA
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+              Muhammad Talha Anjum
+            </span>
+            <span className="text-[10px] font-mono text-zinc-400">
+              AI & Full-Stack Developer
+            </span>
+          </div>
         </a>
 
         {/* Desktop Nav Links */}
@@ -124,34 +102,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Actions */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Brand Switcher Pill */}
-          {onBrandModeChange && (
-            <div className="flex items-center p-0.5 rounded-lg bg-[#0d1117] border border-white/10 text-xs">
-              <button
-                type="button"
-                onClick={() => onBrandModeChange('personal')}
-                className={`px-2.5 py-1 rounded-md transition-all font-mono ${
-                  brandMode === 'personal'
-                    ? 'bg-emerald-500 text-black font-bold shadow-sm'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Personal
-              </button>
-              <button
-                type="button"
-                onClick={() => onBrandModeChange('solvix')}
-                className={`px-2.5 py-1 rounded-md transition-all font-gotham font-bold ${
-                  brandMode === 'solvix'
-                    ? 'bg-emerald-500 text-black font-bold shadow-sm'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Solviqx
-              </button>
-            </div>
-          )}
-
           {/* GitHub Link */}
           <a
             href={PERSONAL_INFO.contact.github}
@@ -192,41 +142,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#08090d] border-b border-white/10 px-6 py-5">
           <div className="flex flex-col gap-3 font-mono text-sm">
-            {onBrandModeChange && (
-              <div className="pb-3 border-b border-white/10 flex items-center justify-between text-xs">
-                <span className="text-zinc-500 font-mono">View Mode:</span>
-                <div className="flex items-center p-0.5 rounded-lg bg-white/5 border border-white/10">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onBrandModeChange('personal')
-                      setMobileMenuOpen(false)
-                    }}
-                    className={`px-3 py-1 rounded-md transition-all font-mono ${
-                      brandMode === 'personal'
-                        ? 'bg-emerald-500 text-black font-bold'
-                        : 'text-zinc-400'
-                    }`}
-                  >
-                    Personal
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onBrandModeChange('solvix')
-                      setMobileMenuOpen(false)
-                    }}
-                    className={`px-3 py-1 rounded-md transition-all font-gotham font-bold ${
-                      brandMode === 'solvix'
-                        ? 'bg-emerald-500 text-black font-bold'
-                        : 'text-zinc-400'
-                    }`}
-                  >
-                    Solviqx
-                  </button>
-                </div>
-              </div>
-            )}
             {navLinks.map((link) => (
               <a
                 key={link.id}
