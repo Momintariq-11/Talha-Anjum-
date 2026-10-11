@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { Send, ArrowDown } from 'lucide-react'
 import { GithubIcon } from './components/Icons'
 import { Navbar } from './components/Navbar'
@@ -16,17 +15,6 @@ import {
 } from './data/personalData'
 
 export function App() {
-  const [showSolvixCredit, setShowSolvixCredit] = useState(true)
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search)
-      if (params.get('solvix') === 'false' || params.get('credit') === 'false') {
-        setShowSolvixCredit(false)
-      }
-    }
-  }, [])
-
   return (
     <div className="min-h-screen bg-[#08090d] text-[#f4f4f6] font-sans selection:bg-emerald-500/30 selection:text-white relative">
       {/* Sticky Navigation */}
@@ -127,7 +115,7 @@ export function App() {
       </main>
 
       {/* ===================== FOOTER ===================== */}
-      <Footer showSolvixCredit={showSolvixCredit} />
+      <Footer />
     </div>
   )
 }
