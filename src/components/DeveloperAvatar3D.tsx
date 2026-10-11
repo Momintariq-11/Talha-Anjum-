@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Play, Pause, Volume2, VolumeX, Mic } from 'lucide-react'
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react'
 import { voiceIntroManager } from './VoiceIntroController'
 import type { VoiceState, AvatarGesture } from './VoiceIntroController'
 
@@ -95,14 +95,6 @@ export const DeveloperAvatar3D: React.FC<DeveloperAvatar3DProps> = ({ className 
                 e.currentTarget.src = '/talha-avatar-idle.jpg'
               }}
             />
-
-            {/* Speaking Audio Badge */}
-            {isSpeaking && (
-              <div className="absolute top-3 right-2 px-2.5 py-1 rounded-full bg-black/80 border border-emerald-500/40 text-[10px] font-mono text-emerald-400 flex items-center gap-1.5 shadow-lg">
-                <Mic className="w-3 h-3 text-emerald-400 animate-pulse" />
-                <span>Bold Voice</span>
-              </div>
-            )}
           </div>
 
           {/* Ground Shadow */}
